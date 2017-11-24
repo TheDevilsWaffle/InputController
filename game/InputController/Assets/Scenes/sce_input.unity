@@ -186,12 +186,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
-  control: 1
-  onPressed: {fileID: 981509158}
+  control: 15
+  onPressed: {fileID: 0}
   onHeld: {fileID: 0}
   heldTimeThreshold: 0
   repeatHeldAction: 0
-  onReleased: {fileID: 0}
+  onReleased: {fileID: 981509158}
   onInactive: {fileID: 0}
 --- !u!1 &1557411895
 GameObject:

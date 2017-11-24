@@ -375,7 +375,10 @@ public class XInput : MonoBehaviour
             _current.ThumbSticks.Left.Y < -analogStickDeadZone ||
             _current.ThumbSticks.Left.Y > analogStickDeadZone)
         {
-            gamepads[_index].ls.SetStatus(InputStatus.HELD);
+            if(gamepads[_index].ls.Status == InputStatus.INACTIVE)
+                gamepads[_index].ls.SetStatus(InputStatus.PRESSED);
+            else
+                gamepads[_index].ls.SetStatus(InputStatus.HELD);
         }
 
         //else, we're inside the deadzone, update status
@@ -384,7 +387,10 @@ public class XInput : MonoBehaviour
                 _current.ThumbSticks.Left.Y > -analogStickDeadZone ||
                 _current.ThumbSticks.Left.Y < analogStickDeadZone)
         {
-            gamepads[_index].ls.SetStatus(InputStatus.INACTIVE);
+            if(gamepads[_index].ls.Status == InputStatus.HELD)
+                gamepads[_index].ls.SetStatus(InputStatus.RELEASED);
+            else
+                gamepads[_index].ls.SetStatus(InputStatus.INACTIVE);
         }
 
         //RELEASED
@@ -434,7 +440,10 @@ public class XInput : MonoBehaviour
             _current.ThumbSticks.Right.Y < -analogStickDeadZone ||
             _current.ThumbSticks.Right.Y > analogStickDeadZone)
         {
-            gamepads[_index].rs.SetStatus(InputStatus.HELD);
+            if(gamepads[_index].rs.Status == InputStatus.INACTIVE)
+                gamepads[_index].rs.SetStatus(InputStatus.PRESSED);
+            else
+                gamepads[_index].rs.SetStatus(InputStatus.HELD);
         }
 
         //else, we're outside the deadzone, update status
@@ -443,7 +452,10 @@ public class XInput : MonoBehaviour
                 _current.ThumbSticks.Right.Y > -analogStickDeadZone ||
                 _current.ThumbSticks.Right.Y < analogStickDeadZone)
         {
-            gamepads[_index].rs.SetStatus(InputStatus.INACTIVE);
+            if(gamepads[_index].rs.Status == InputStatus.HELD)
+                gamepads[_index].rs.SetStatus(InputStatus.RELEASED);
+            else
+                gamepads[_index].rs.SetStatus(InputStatus.INACTIVE);
         }
 
         //RELEASED
