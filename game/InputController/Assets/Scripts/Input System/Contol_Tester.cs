@@ -111,7 +111,7 @@ public class Contol_Tester : InputActionBase
     public override void Activate()
     {
         base.Activate();
-        Debug.Log("ACTIVATED!");
+        //Debug.Log("ACTIVATED!");
     }
     #endregion
 

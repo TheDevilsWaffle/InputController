@@ -68,7 +68,7 @@ public class XInput : MonoBehaviour
     [Header("PLAYER")]
     [Range(1, 4)]
     [SerializeField]
-    public static int playerCount = 1;
+    int players = 1;
 
     [Header("DEAD ZONES")]
     [Range(0, 1)]
@@ -114,8 +114,6 @@ public class XInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void OnValidate()
     {
-        //refs
-
         //set/check initial values
         up = -90f;
         up_right = -45f;
@@ -126,8 +124,6 @@ public class XInput : MonoBehaviour
         left = -180f;
         up_left = -135f;
         axisLimit = 22.5f;
-
-        gamepads = new List<XInputData>();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -136,27 +132,12 @@ public class XInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
+        
+
         if (isEnabled)
         {
-            //popluate list of players based on numberOfPlayers
-            for (int _index = 0; _index < playerCount; ++_index)
-            {
-                GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
-                if (_testState.IsConnected)
-                    gamepads.Add(new XInputData());
-            }
+            InitializeGamepads();
         }
-
-        //SetSubscriptions();
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// SetSubscriptions
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    void SetSubscriptions()
-    {
-        //Events.instance.AddListener<>();
     }
     #endregion
 
@@ -171,7 +152,7 @@ public class XInput : MonoBehaviour
         //gamepad enabled? go through the update loop
         if (isEnabled)
         {
-            for (int _index = 0; _index < playerCount; ++_index)
+            for (int _index = 0; _index < players; ++_index)
             {
                 //first test to make sure there's a controller there to update
                 GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
@@ -181,6 +162,10 @@ public class XInput : MonoBehaviour
                     previousState = currentState;
                     currentState = GamePad.GetState((PlayerIndex)_index);
 
+                    //DEBUG TESTING
+                    // Debug.Log("_index = " + _index);
+                    // Debug.Log("players = " + players);
+
                     //check the gamepad for input
                     UpdateDPad(_index, previousState, currentState);
                     UpdateSticks(_index, previousState, currentState);
@@ -188,20 +173,58 @@ public class XInput : MonoBehaviour
                     UpdateBumpers(_index, previousState, currentState);
                     UpdateTriggers(_index, previousState, currentState);
 
-                    //TEST - xinput update loop
-                    //Debug.Log("TEST - XInput Update Loop("+Time.deltaTime+")");
-
                     //raise new game event
                     Broadcast(_index);
                 }
                 else
                     Debug.LogWarning("WARNING! Player(" + _index + ") no longer exists? ");
+                    ResetPlayerIndex();
             }
         }
     }
     #endregion
 
     #region PRIVATE METHODS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// resets gamepads and creates a new list of active gamepads
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    void ResetPlayerIndex()
+    {
+        //clear out the gamepads list and reinitialize
+        gamepads.Clear();
+        int _playerCheck = 0;
+        for (int _index = 0; _index < players; ++_index)
+        {
+            GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
+            if (_testState.IsConnected)
+            {
+                ++_playerCheck;
+            }
+        }
+        if(_playerCheck == players)
+            InitializeGamepads();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// populates gamepads list with gamepad indices
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    void InitializeGamepads()
+    {
+        //create list to store gamepad data and initialize gamepads
+        gamepads = new List<XInputData>();
+
+        //popluate list of players based on numberOfPlayers
+        for (int _index = 0; _index < players; ++_index)
+        {
+            GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
+            if (_testState.IsConnected)
+                gamepads.Add(new XInputData());
+        }
+        //print(gamepads.Count);
+    }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// updates the statuses of the DPad
@@ -239,6 +262,8 @@ public class XInput : MonoBehaviour
         //INACTIVE
         else
         {
+            print(gamepads[_index]);
+            print(gamepads.Count);
             gamepads[_index].dp_up.SetStatus(InputStatus.INACTIVE);
             gamepads[_index].dp_up.SetXYValue(0f, 0f);
             gamepads[_index].dp_up.SetHeldDuration(0f);
