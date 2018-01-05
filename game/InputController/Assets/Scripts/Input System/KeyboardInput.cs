@@ -21,6 +21,9 @@ public enum KeyboardKeyStatus
 public class KeyboardInput : MonoBehaviour
 {
     #region FIELDS
+    [Header("Player")]
+    [Range(0, 4)]
+    public int player = 1;
     [Header("Keyboard Controls")]
     [Header("Movement/Directions")]
     public KeyCode up = KeyCode.W;
@@ -56,6 +59,9 @@ public class KeyboardInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
+        //correct player number to use as index for gamepads
+        --player;
+
        //create keys dictionary and list (list needed to traverse dictionary and update dictionary value(cannot update value by reference))
        keys = new Dictionary<KeyCode, KeyboardKeyStatus>();
         
@@ -145,6 +151,15 @@ public class KeyboardInput : MonoBehaviour
        */
    }
 
+   // ---------------IMPORTANT > LOOK AT THIS! this won't work, need to do individual ones per key.
+   
+    // void SetStatus(XInputData _button, InputStatus _status, int _x, int _y, float _duration)
+    // {
+    //     XInput.gamepads[player].
+    //     gamepads[_index].dp_up.SetStatus(InputStatus.RELEASED);
+    //     gamepads[_index].dp_up.SetXYValue(0f, 0f);
+    //     gamepads[_index].dp_up.SetInactiveDuration(Time.deltaTime);
+    // }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// cycles through keys and updates their status

@@ -57,6 +57,22 @@ public class EVENT_XINPUT_P4 : GameEvent
         gamepad = _gamepad;
     }
 }
+public class EVENT_XINPUT_GAMEPAD_DETECTION_LOST : GameEvent
+{
+    public int playerNumber;
+    public EVENT_XINPUT_GAMEPAD_DETECTION_LOST(int _playerNumber)
+    {
+        playerNumber = _playerNumber;
+    }
+}
+public class EVENT_XINPUT_GAMEPAD_DETECTION_ACQUIRED : GameEvent
+{
+    public int playerNumber;
+    public EVENT_XINPUT_GAMEPAD_DETECTION_ACQUIRED(int _playerNumber)
+    {
+        playerNumber = _playerNumber;
+    }
+}
 #endregion
 
 public class XInput : MonoBehaviour
@@ -160,7 +176,7 @@ public class XInput : MonoBehaviour
             //loop through players set in inspector
             for (int _index = 0; _index < players; ++_index)
             {
-                //first test to make sure there's a controller there to update
+                //ensure that this gamepad is still connected
                 GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
                 if (_testState.IsConnected)
                 {
@@ -184,8 +200,11 @@ public class XInput : MonoBehaviour
                     //stop looping through gamepad update
                     isReady = false;
 
+                    //broadcast gamepad detection lost event
+                    Events.instance.Raise(new EVENT_XINPUT_GAMEPAD_DETECTION_LOST(_index));
+
                     //DEBUG
-                    Debug.LogWarning("WARNING! Player(" + _index + ") no longer exists? ");
+                    //Debug.LogWarning("WARNING! Player(" + _index + ") no longer exists? ");
                 }
             }
         }
@@ -216,6 +235,10 @@ public class XInput : MonoBehaviour
             GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
             if (_testState.IsConnected)
             {
+                //broadcast gamepad acquired event
+                Events.instance.Raise(new EVENT_XINPUT_GAMEPAD_DETECTION_ACQUIRED(_index));
+
+                //add a XInputData to list for this gamepad
                 gamepads.Add(new XInputData());
                 
                 //DEBUG
