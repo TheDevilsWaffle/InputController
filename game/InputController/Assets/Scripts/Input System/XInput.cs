@@ -64,6 +64,7 @@ public class XInput : MonoBehaviour
     #region FIELDS
     [Header("ENABLE/DISABLE")]
     public bool isEnabled = true;
+    bool isReady = false;
 
     [Header("PLAYER")]
     [Range(1, 4)]
@@ -124,6 +125,8 @@ public class XInput : MonoBehaviour
         left = -180f;
         up_left = -135f;
         axisLimit = 22.5f;
+
+        isReady = false;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -132,8 +135,10 @@ public class XInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
-        
+        //create list to store gamepad data
+        gamepads = new List<XInputData>();
 
+        //if gamepads are enabled in inspector, initialize gamepads
         if (isEnabled)
         {
             InitializeGamepads();
@@ -150,8 +155,9 @@ public class XInput : MonoBehaviour
     void Update()
     {
         //gamepad enabled? go through the update loop
-        if (isEnabled)
+        if (isEnabled && isReady)
         {
+            //loop through players set in inspector
             for (int _index = 0; _index < players; ++_index)
             {
                 //first test to make sure there's a controller there to update
@@ -162,24 +168,34 @@ public class XInput : MonoBehaviour
                     previousState = currentState;
                     currentState = GamePad.GetState((PlayerIndex)_index);
 
-                    //DEBUG TESTING
-                    // Debug.Log("_index = " + _index);
-                    // Debug.Log("players = " + players);
-
-                    //check the gamepad for input
+                    //check current gamepad dpad/sticks/bumpers/triggers for input
                     UpdateDPad(_index, previousState, currentState);
                     UpdateSticks(_index, previousState, currentState);
                     UpdateButtons(_index, previousState, currentState);
                     UpdateBumpers(_index, previousState, currentState);
                     UpdateTriggers(_index, previousState, currentState);
 
-                    //raise new game event
+                    //broadcast event with updated gamepad information for current gamepad
                     Broadcast(_index);
                 }
+                //something is wrong with gamepads, we are no longer ready (possibly unplugged gamepad)
                 else
+                {
+                    //stop looping through gamepad update
+                    isReady = false;
+
+                    //DEBUG
                     Debug.LogWarning("WARNING! Player(" + _index + ") no longer exists? ");
-                    ResetPlayerIndex();
+                }
             }
+        }
+        else
+        {
+            //DEBUG
+            //Debug.Log("attempting to repopulate gamepads");
+
+            //attempt to repopulate gamepads
+            InitializeGamepads();
         }
     }
     #endregion
@@ -187,43 +203,52 @@ public class XInput : MonoBehaviour
     #region PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// resets gamepads and creates a new list of active gamepads
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    void ResetPlayerIndex()
-    {
-        //clear out the gamepads list and reinitialize
-        gamepads.Clear();
-        int _playerCheck = 0;
-        for (int _index = 0; _index < players; ++_index)
-        {
-            GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
-            if (_testState.IsConnected)
-            {
-                ++_playerCheck;
-            }
-        }
-        if(_playerCheck == players)
-            InitializeGamepads();
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// populates gamepads list with gamepad indices
+    /// populates gamepads list with gamepads based on inspector set players
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void InitializeGamepads()
     {
-        //create list to store gamepad data and initialize gamepads
-        gamepads = new List<XInputData>();
+        gamepads.Clear();
 
         //popluate list of players based on numberOfPlayers
         for (int _index = 0; _index < players; ++_index)
         {
             GamePadState _testState = GamePad.GetState((PlayerIndex)_index);
             if (_testState.IsConnected)
+            {
                 gamepads.Add(new XInputData());
+                
+                //DEBUG
+                //Debug.Log("Added a gamepad to gamepads("+_index+")");
+            }
         }
-        //print(gamepads.Count);
+        //perform check to see if gamepads count matches the set players count
+        if(CheckIfAllGamepadsAreReady())
+        {
+            isReady = true;
+
+            //DEBUG
+            //Debug.Log("All gamepads are ready = (" + isReady + ")");
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// checks if gamepads list has all gamepads added and ready to go
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    bool CheckIfAllGamepadsAreReady()
+    {
+        //DEBUG
+        //Debug.Log("gamepads.Count = (" + gamepads.Count + ") & players = " + players);
+
+        if(gamepads.Count == players)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -262,8 +287,6 @@ public class XInput : MonoBehaviour
         //INACTIVE
         else
         {
-            print(gamepads[_index]);
-            print(gamepads.Count);
             gamepads[_index].dp_up.SetStatus(InputStatus.INACTIVE);
             gamepads[_index].dp_up.SetXYValue(0f, 0f);
             gamepads[_index].dp_up.SetHeldDuration(0f);
