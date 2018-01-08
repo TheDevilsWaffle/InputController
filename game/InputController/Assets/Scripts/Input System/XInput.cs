@@ -943,7 +943,7 @@ public class XInput : MonoBehaviour
     /// <param name="_index">current player index</param>
     /// <param name="_button">last button pressed</param>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    void UpdateCombo(int _index, InputData _button)
+    public void UpdateCombo(int _index, InputData _button)
     {
         //add in the new button
         gamepads[_index].comboTracker.Enqueue(_button);

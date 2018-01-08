@@ -8,16 +8,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-#region ENUMS
-public enum KeyboardKeyStatus
-{
-    INACTIVE,
-    HELD,
-    PRESSED, 
-    RELEASED
-}
-#endregion
-
 public class KeyboardInput : MonoBehaviour
 {
     #region FIELDS
@@ -25,12 +15,17 @@ public class KeyboardInput : MonoBehaviour
     [Range(0, 4)]
     public int player = 1;
     [Header("Keyboard Controls")]
-    [Header("Movement/Directions")]
+    [Header("Analog Sticks")]
     public KeyCode up = KeyCode.W;
     public KeyCode right = KeyCode.D;
     public KeyCode down = KeyCode.S;
     public KeyCode left = KeyCode.A;
-    [Header("Standard Buttons")]
+    [Header("DPad")]
+    public KeyCode dpad_up = KeyCode.UpArrow;
+    public KeyCode dpad_right = KeyCode.RightArrow;
+    public KeyCode dpad_down = KeyCode.DownArrow;
+    public KeyCode dpad_left = KeyCode.LeftArrow;
+    [Header("Buttons")]
     public KeyCode y = KeyCode.LeftControl;
     public KeyCode b = KeyCode.Q;
     public KeyCode a = KeyCode.Space;
@@ -47,7 +42,7 @@ public class KeyboardInput : MonoBehaviour
     public KeyCode select = KeyCode.Tab;
     public KeyCode start = KeyCode.Return;
     [HideInInspector]
-    public static Dictionary<KeyCode, KeyboardKeyStatus> keys;
+    public static Dictionary<KeyCode, InputStatus> keys;
     private List<KeyCode> keysList;
     #endregion
 
@@ -63,7 +58,7 @@ public class KeyboardInput : MonoBehaviour
         --player;
 
        //create keys dictionary and list (list needed to traverse dictionary and update dictionary value(cannot update value by reference))
-       keys = new Dictionary<KeyCode, KeyboardKeyStatus>();
+       keys = new Dictionary<KeyCode, InputStatus>();
         
        //check for assigned keys and store them in keys
        AddAssignedKeys();
@@ -82,10 +77,13 @@ public class KeyboardInput : MonoBehaviour
         UpdateKeyboardInput();
 
         //DEBUG — print out the contents of keys
-        //    foreach(KeyValuePair<KeyCode, KeyboardKeyStatus> key in keys)
+        //    foreach(KeyValuePair<KeyCode, InputStatus> key in keys)
         //    {
         //        print("key = " + key.Key + ", and its status is = " + key.Value);
         //    }
+
+        //DEBUG KEYBOARD -> GAMEPAD INPUT CHECK
+        Debug.Log("DPAD_UP = " + XInput.gamepads[player].dp_up.Status);
     }
     #endregion
 
@@ -97,47 +95,57 @@ public class KeyboardInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void AddAssignedKeys()
    {
-       //checking movement keys
+       //checking analog stick keys
        if (up != KeyCode.None)
-           keys.Add(up, KeyboardKeyStatus.INACTIVE);
+           keys.Add(up, InputStatus.INACTIVE);
        if (right != KeyCode.None)
-           keys.Add(right, KeyboardKeyStatus.INACTIVE);
+           keys.Add(right, InputStatus.INACTIVE);
        if (down != KeyCode.None)
-           keys.Add(down, KeyboardKeyStatus.INACTIVE);
+           keys.Add(down, InputStatus.INACTIVE);
        if (left != KeyCode.None)
-           keys.Add(left, KeyboardKeyStatus.INACTIVE);
+           keys.Add(left, InputStatus.INACTIVE);
 
-       //checking standard button/keys
+        //add dpad keys
+        if (dpad_up != KeyCode.None)
+            keys.Add(dpad_up, InputStatus.INACTIVE);
+        if (dpad_right != KeyCode.None)
+            keys.Add(dpad_right, InputStatus.INACTIVE);
+        if (dpad_down != KeyCode.None)
+            keys.Add(dpad_down, InputStatus.INACTIVE);
+        if (dpad_left != KeyCode.None)
+            keys.Add(dpad_left, InputStatus.INACTIVE);
+
+       //checking button/keys
        if (y != KeyCode.None)
-           keys.Add(y, KeyboardKeyStatus.INACTIVE);
+           keys.Add(y, InputStatus.INACTIVE);
        if (b != KeyCode.None)
-           keys.Add(b, KeyboardKeyStatus.INACTIVE);
+           keys.Add(b, InputStatus.INACTIVE);
        if (a != KeyCode.None)
-           keys.Add(a, KeyboardKeyStatus.INACTIVE);
+           keys.Add(a, InputStatus.INACTIVE);
        if (x != KeyCode.None)
-           keys.Add(x, KeyboardKeyStatus.INACTIVE);
+           keys.Add(x, InputStatus.INACTIVE);
 
        //checking shoulder button/keys
        if (l1 != KeyCode.None)
-           keys.Add(l1, KeyboardKeyStatus.INACTIVE);
+           keys.Add(l1, InputStatus.INACTIVE);
        if (l2 != KeyCode.None)
-           keys.Add(l2, KeyboardKeyStatus.INACTIVE);
+           keys.Add(l2, InputStatus.INACTIVE);
        if (r1 != KeyCode.None)
-           keys.Add(r1, KeyboardKeyStatus.INACTIVE);
+           keys.Add(r1, InputStatus.INACTIVE);
        if (r2 != KeyCode.None)
-           keys.Add(r2, KeyboardKeyStatus.INACTIVE);
+           keys.Add(r2, InputStatus.INACTIVE);
 
        //checking analog button/keys
        if (l3 != KeyCode.None)
-           keys.Add(l3, KeyboardKeyStatus.INACTIVE);
+           keys.Add(l3, InputStatus.INACTIVE);
        if (r3 != KeyCode.None)
-           keys.Add(r3, KeyboardKeyStatus.INACTIVE);
+           keys.Add(r3, InputStatus.INACTIVE);
 
        //checking misc button/keys
        if (select != KeyCode.None)
-           keys.Add(select, KeyboardKeyStatus.INACTIVE);
+           keys.Add(select, InputStatus.INACTIVE);
        if (start != KeyCode.None)
-           keys.Add(start, KeyboardKeyStatus.INACTIVE);
+           keys.Add(start, InputStatus.INACTIVE);
 
        keysList = new List<KeyCode>(keys.Keys);
 
@@ -170,27 +178,28 @@ public class KeyboardInput : MonoBehaviour
         foreach (KeyCode key in keysList)
         {
             //released
-            if (Input.GetKeyUp(key) && keys[key] == KeyboardKeyStatus.HELD)
+            if (Input.GetKeyUp(key) && keys[key] == InputStatus.HELD)
             {
-                keys[key] = KeyboardKeyStatus.RELEASED;
+                keys[key] = InputStatus.RELEASED;
+                
 
                 //DEBUG — check which key is released and print its status
                 //print("key released: " + key + " status = " + keys[key]);
             }
 
             //held
-            else if (Input.GetKey(key) && keys[key] == KeyboardKeyStatus.PRESSED || keys[key] == KeyboardKeyStatus.HELD)
+            else if (Input.GetKey(key) && keys[key] == InputStatus.PRESSED || keys[key] == InputStatus.HELD)
             {
-                keys[key] = KeyboardKeyStatus.HELD;
+                keys[key] = InputStatus.HELD;
 
                 //DEBUG — check which key is held and print its status
                 //print("key held: " + key + " status = " + keys[key]);
             }
 
             //pressed
-            else if (Input.GetKeyDown(key) && keys[key] == KeyboardKeyStatus.INACTIVE)
+            else if (Input.GetKeyDown(key) && keys[key] == InputStatus.INACTIVE)
             {
-                keys[key] = KeyboardKeyStatus.PRESSED;
+                keys[key] = InputStatus.PRESSED;
 
                 //DEBUG — check which key is pressed and print its status
                 //print("key pressed: " + key + " status = " + keys[key]);
@@ -199,10 +208,56 @@ public class KeyboardInput : MonoBehaviour
             //key is not pressed
             else
             {
-                keys[key] = KeyboardKeyStatus.INACTIVE;
+                keys[key] = InputStatus.INACTIVE;
 
                 //DEBUG — check which key is inactive and print its status
                 //print("key inactive: " + key + " status = " + keys[key]);
+            }
+
+            UpdateGamepads(key, keys[key]);
+        }
+    }
+
+    void UpdateGamepads(KeyCode _key, InputStatus _status)
+    {
+        //dpads
+        if(_key == dpad_up)
+        {
+            //do not override the gamepad itself
+            if(XInput.gamepads[player].dp_up.Status == InputStatus.INACTIVE)
+            {
+                //first set status, then update data based upon status
+                XInput.gamepads[player].dp_up.SetStatus(_status);
+                //RELEASED
+                if (_status == InputStatus.RELEASED)
+                {
+                    XInput.gamepads[player].dp_up.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_up.SetInactiveDuration(Time.deltaTime);
+
+                }
+                //HELD
+                else if(_status == InputStatus.HELD)
+                {
+                    XInput.gamepads[player].dp_up.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_up.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[player].dp_up.SetInactiveDuration(0f);
+                }
+                //PRESSED
+                else if (_status == InputStatus.PRESSED)
+                {
+                    XInput.gamepads[player].dp_up.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_up.SetHeldDuration(Time.deltaTime);
+
+                    //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
+                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                }
+                //INACTIVE
+                else
+                {
+                    XInput.gamepads[player].dp_up.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_up.SetHeldDuration(0f);
+                    XInput.gamepads[player].dp_up.SetInactiveDuration(0f);
+                }
             }
         }
     }
