@@ -83,7 +83,10 @@ public class KeyboardInput : MonoBehaviour
         //    }
 
         //DEBUG KEYBOARD -> GAMEPAD INPUT CHECK
-        Debug.Log("DPAD_UP = " + XInput.gamepads[player].dp_up.Status);
+        //Debug.Log("DPAD_UP = " + XInput.gamepads[player].dp_up.Status);
+        //Debug.Log("DPAD_RIGHT = " + XInput.gamepads[player].dp_right.Status);
+        //Debug.Log("DPAD_DOWN = " + XInput.gamepads[player].dp_down.Status);
+        //Debug.Log("DPAD_LEFT = " + XInput.gamepads[player].dp_left.Status);
     }
     #endregion
 
@@ -220,7 +223,8 @@ public class KeyboardInput : MonoBehaviour
 
     void UpdateGamepads(KeyCode _key, InputStatus _status)
     {
-        //dpads
+        #region DPADS
+        //DPAD UP
         if(_key == dpad_up)
         {
             //do not override the gamepad itself
@@ -260,6 +264,220 @@ public class KeyboardInput : MonoBehaviour
                 }
             }
         }
+        //DPAD RIGHT
+        if (_key == dpad_right)
+        {
+            //do not override the gamepad itself
+            if (XInput.gamepads[player].dp_right.Status == InputStatus.INACTIVE)
+            {
+                //first set status, then update data based upon status
+                XInput.gamepads[player].dp_right.SetStatus(_status);
+                //RELEASED
+                if (_status == InputStatus.RELEASED)
+                {
+                    XInput.gamepads[player].dp_right.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_right.SetInactiveDuration(Time.deltaTime);
+
+                }
+                //HELD
+                else if (_status == InputStatus.HELD)
+                {
+                    XInput.gamepads[player].dp_right.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_right.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[player].dp_right.SetInactiveDuration(0f);
+                }
+                //PRESSED
+                else if (_status == InputStatus.PRESSED)
+                {
+                    XInput.gamepads[player].dp_right.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_right.SetHeldDuration(Time.deltaTime);
+
+                    //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
+                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                }
+                //INACTIVE
+                else
+                {
+                    XInput.gamepads[player].dp_right.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_right.SetHeldDuration(0f);
+                    XInput.gamepads[player].dp_right.SetInactiveDuration(0f);
+                }
+            }
+        }
+        //DPAD DOWN
+        if (_key == dpad_down)
+        {
+            //do not override the gamepad itself
+            if (XInput.gamepads[player].dp_down.Status == InputStatus.INACTIVE)
+            {
+                //first set status, then update data based upon status
+                XInput.gamepads[player].dp_down.SetStatus(_status);
+                //RELEASED
+                if (_status == InputStatus.RELEASED)
+                {
+                    XInput.gamepads[player].dp_down.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_down.SetInactiveDuration(Time.deltaTime);
+
+                }
+                //HELD
+                else if (_status == InputStatus.HELD)
+                {
+                    XInput.gamepads[player].dp_down.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_down.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[player].dp_down.SetInactiveDuration(0f);
+                }
+                //PRESSED
+                else if (_status == InputStatus.PRESSED)
+                {
+                    XInput.gamepads[player].dp_down.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_down.SetHeldDuration(Time.deltaTime);
+
+                    //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
+                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                }
+                //INACTIVE
+                else
+                {
+                    XInput.gamepads[player].dp_down.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_down.SetHeldDuration(0f);
+                    XInput.gamepads[player].dp_down.SetInactiveDuration(0f);
+                }
+            }
+        }
+        //DPAD LEFT
+        if (_key == dpad_left)
+        {
+            //do not override the gamepad itself
+            if (XInput.gamepads[player].dp_left.Status == InputStatus.INACTIVE)
+            {
+                //first set status, then update data based upon status
+                XInput.gamepads[player].dp_left.SetStatus(_status);
+                //RELEASED
+                if (_status == InputStatus.RELEASED)
+                {
+                    XInput.gamepads[player].dp_left.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_left.SetInactiveDuration(Time.deltaTime);
+
+                }
+                //HELD
+                else if (_status == InputStatus.HELD)
+                {
+                    XInput.gamepads[player].dp_left.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_left.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[player].dp_left.SetInactiveDuration(0f);
+                }
+                //PRESSED
+                else if (_status == InputStatus.PRESSED)
+                {
+                    XInput.gamepads[player].dp_left.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].dp_left.SetHeldDuration(Time.deltaTime);
+
+                    //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
+                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                }
+                //INACTIVE
+                else
+                {
+                    XInput.gamepads[player].dp_left.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].dp_left.SetHeldDuration(0f);
+                    XInput.gamepads[player].dp_left.SetInactiveDuration(0f);
+                }
+            }
+        }
+        #endregion
+        #region ANALOG STICKS
+        //LEFT KEY
+        if (_key == left)
+        {
+            //do not override the gamepad itself
+            if (XInput.gamepads[player].ls.Status == InputStatus.INACTIVE)
+            {
+                //first set status, then update data based upon status
+                XInput.gamepads[player].ls.SetStatus(_status);
+
+                //RELEASED
+                if (_status == InputStatus.RELEASED)
+                {
+                    XInput.gamepads[player].ls.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].ls.SetInactiveDuration(Time.deltaTime);
+
+                }
+                //HELD
+                else if (_status == InputStatus.HELD)
+                {
+                    //IMPORTANT! --> this will need to be set after up,left,right,down are checked.
+                    XInput.gamepads[player].ls.SetXYValue(-1f, 0f);
+                    XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[player].ls.SetInactiveDuration(0f);
+
+                    //this might need to be checked/updated AFTER all directions (up, right, down, left) are checked
+                    XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.LEFT);
+                    XInput.gamepads[player].ls.SetAngle(0f);
+                }
+                //PRESSED
+                else if (_status == InputStatus.PRESSED)
+                {
+                    XInput.gamepads[player].ls.SetXYValue(1f, 1f);
+                    XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
+
+                    //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
+                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                }
+                //INACTIVE
+                else
+                {
+                    XInput.gamepads[player].ls.SetXYValue(0f, 0f);
+                    XInput.gamepads[player].ls.SetHeldDuration(0f);
+                    XInput.gamepads[player].ls.SetInactiveDuration(0f);
+                }
+            }
+            //RIGHT KEY
+            else if (_key == right)
+            {
+                //do not override the gamepad itself
+                if (XInput.gamepads[player].ls.Status == InputStatus.INACTIVE)
+                {
+                    //first set status, then update data based upon status
+                    XInput.gamepads[player].ls.SetStatus(_status);
+
+                    //RELEASED
+                    if (_status == InputStatus.RELEASED)
+                    {
+                        XInput.gamepads[player].ls.SetXYValue(0f, 0f);
+                        XInput.gamepads[player].ls.SetInactiveDuration(Time.deltaTime);
+
+                    }
+                    //HELD
+                    else if (_status == InputStatus.HELD)
+                    {
+                        //IMPORTANT! --> this will need to be set after up,left,right,down are checked.
+                        XInput.gamepads[player].ls.SetXYValue(1f, 0f);
+                        XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
+                        XInput.gamepads[player].ls.SetInactiveDuration(0f);
+
+                        //this might need to be checked/updated AFTER all directions (up, right, down, left) are checked
+                        XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.RIGHT);
+                        XInput.gamepads[player].ls.SetAngle(0f);
+                    }
+                    //PRESSED
+                    else if (_status == InputStatus.PRESSED)
+                    {
+                        XInput.gamepads[player].ls.SetXYValue(1f, 1f);
+                        XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
+
+                        //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
+                        //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    }
+                    //INACTIVE
+                    else
+                    {
+                        XInput.gamepads[player].ls.SetXYValue(0f, 0f);
+                        XInput.gamepads[player].ls.SetHeldDuration(0f);
+                        XInput.gamepads[player].ls.SetInactiveDuration(0f);
+                    }
+                }
+            
+        #endregion
     }
     #endregion
 }

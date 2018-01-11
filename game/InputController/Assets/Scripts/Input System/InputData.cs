@@ -130,6 +130,15 @@ public class InputData
         XYValues = new Vector2(_x, _y);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void AddXYValue(float _x, float _y)
+    {
+        XYValues += new Vector2(_x, _y);
+        
+        //keep values between 0 and 1
+        Mathf.Clamp01(XYValues.x);
+        Mathf.Clamp01(XYValues.y);
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetXYRawValue(Vector2 _values)
     {
         XYRawValues = _values;
