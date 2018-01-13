@@ -962,7 +962,7 @@ public class XInput : MonoBehaviour
     /// <param name="_angle">angle of the stick</param>
     /// <returns></returns>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    ArcadeAxis DetermineArcadeAxis(InputStatus _status, float _angle)
+    public ArcadeAxis DetermineArcadeAxis(InputStatus _status, float _angle)
     {
         //is the stick active?
         if (_status == InputStatus.INACTIVE)

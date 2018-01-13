@@ -134,9 +134,9 @@ public class InputData
     {
         XYValues += new Vector2(_x, _y);
         
-        //keep values between 0 and 1
-        Mathf.Clamp01(XYValues.x);
-        Mathf.Clamp01(XYValues.y);
+        //keep values between -1 and 1
+        Mathf.Clamp(XYValues.x, -1f, 1f);
+        Mathf.Clamp(XYValues.y, -1f, 1f);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetXYRawValue(Vector2 _values)
