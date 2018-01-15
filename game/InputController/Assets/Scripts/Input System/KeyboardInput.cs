@@ -101,92 +101,107 @@ public class KeyboardInput : MonoBehaviour
     #endregion
 
     #region PRIVATE METHODS
-    void EvaluateDirectionalInput(InputStatus _up, InputStatus _right, InputStatus _down, InputStatus _left)
+    void UpdateDirectionalInput(InputStatus _up, InputStatus _right, InputStatus _down, InputStatus _left)
     {
+        //up
+        if (_up == InputStatus.PRESSED || _up == InputStatus.HELD)
+        {
+            XInput.gamepads[player].ls.AddYValue(1f);
+        }
+        //right
+        if (_right == InputStatus.PRESSED || _right == InputStatus.HELD)
+        {
+            XInput.gamepads[player].ls.AddXValue(1f);
+        }
+        //down
+        if (_down == InputStatus.PRESSED || _down == InputStatus.HELD)
+        {
+            XInput.gamepads[player].ls.AddYValue(-1f);
+        }
+        //left
+        if (_left == InputStatus.PRESSED || _left == InputStatus.HELD)
+        {
+            XInput.gamepads[player].ls.AddXValue(-1f);
+        }
         //edge cases
         if(_up == _down)
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.INACTIVE);
-            XInput.gamepads[player].ls.SetAngle(0f);
-            XInput.gamepads[player].ls.AddXYValue(0f,0f);
+            XInput.gamepads[player].ls.SetYValue(0f);
+            //keys[left].value == InputStatus.INACTIVE;
         }
         if(_left == _right)
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.INACTIVE);
-            XInput.gamepads[player].ls.SetAngle(0f);
-            XInput.gamepads[player].ls.AddXYValue(0f, 0f);
+            XInput.gamepads[player].ls.SetXValue(0f);
         }
 
-        //up
-        //NEED TO FIGURE OUT HOW TO ACTUALLY GIVE VALUES TO LS XYVALUES, CONSIDER DOING WHAT IS ALREADY DONE BELOW
-
+        //EvaluateDirectionalInput
+        EvaluateDirectionalInput(XInput.gamepads[player].ls.XYValues);
     }
-    void EvaluateDirectionalInput(float _x, float _y, InputStatus _upStatus, InputStatus _rightStatus, InputStatus _downStatus, InputStatus _leftStatus)
+    void EvaluateDirectionalInput(Vector2 _vector)
     {
-        Debug.Log("left key input status = "+ _leftStatus);
-        Debug.Log("right key input status = "+ _rightStatus);
-        //check up versus down statuses
-        if(_upStatus == _downStatus)
-            _y = 0f;
-        if(_rightStatus == _leftStatus)
-        {
-            _x = 0f;
-        }
         //up
-        if (_x == 0 && _y == 1)
+        if(_vector == new Vector2(0f, 1f))
         {
             XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP);
-            XInput.gamepads[player].ls.SetAngle(270f);
+            XInput.gamepads[player].ls.SetAngle(-90f);
+            return;
         }
-        //right
-        else if (_x == 1 && _y == 0)
+        //up_left
+        if (_vector == new Vector2(-1f, 1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.RIGHT);
-            XInput.gamepads[player].ls.SetAngle(0);
+            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP_LEFT);
+            XInput.gamepads[player].ls.SetAngle(-135f);
+            return;
         }
         //up_right
-        else if (_x == 1 && _y == 1)
+        if(_vector == new Vector2(1f, 1f))
         {
             XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP_RIGHT);
-            XInput.gamepads[player].ls.SetAngle(315f);
+            XInput.gamepads[player].ls.SetAngle(-45f);
+            return;
+        }
+        //right
+        if (_vector == new Vector2(1f, 0f))
+        {
+            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.RIGHT);
+            XInput.gamepads[player].ls.SetAngle(0f);
+            return;
         }
         //down
-        else if (_x == 0 && _y == -1)
+        if (_vector == new Vector2(0f, -1f))
         {
             XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN);
             XInput.gamepads[player].ls.SetAngle(90f);
+            return;
         }
-        //down_right
-        else if (_x == 1 && _y == -1)
-        {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN_RIGHT);
-            XInput.gamepads[player].ls.SetAngle(45f);
-        }
-        //left
-        else if (_x == -1 && _y == 0)
-        {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.LEFT);
-            XInput.gamepads[player].ls.SetAngle(180f);
-        }
-        //up_left
-        else if (_x == -1 && _y == 1)
-        {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP_LEFT);
-            XInput.gamepads[player].ls.SetAngle(225f);
-        }
-        //down_left
-        else if (_x == -1 && _y == -1)
+        //down left
+        if (_vector == new Vector2(-1f, -1f))
         {
             XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN_LEFT);
             XInput.gamepads[player].ls.SetAngle(135f);
+            return;
         }
-        //default case
+        //down_right
+        if (_vector == new Vector2(1f, -1f))
+        {
+            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN_RIGHT);
+            XInput.gamepads[player].ls.SetAngle(-45f);
+            return;
+        }
+        //left
+        if (_vector == new Vector2(-1f, 0f))
+        {
+            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.LEFT);
+            XInput.gamepads[player].ls.SetAngle(-180f);
+            return;
+        }
+        //inactive
         else
         {
             XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.INACTIVE);
             XInput.gamepads[player].ls.SetAngle(0f);
+            return;
         }
-        
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -315,7 +330,7 @@ public class KeyboardInput : MonoBehaviour
             }
             UpdateGamepads(key, keys[key]);
         }
-        EvaluateDirectionalInput(keys[up], keys[right], keys[down], keys[left]);
+        UpdateDirectionalInput(keys[up], keys[right], keys[down], keys[left]);
         
     }
 

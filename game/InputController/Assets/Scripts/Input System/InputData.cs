@@ -123,20 +123,49 @@ public class InputData
     public void SetXYValue(Vector2 _values)
     {
         XYValues = _values;
+        ClampXYValues();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void AddXValue(float _x)
+    {
+        xy.x += _x;
+        ClampXYValues();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void AddYValue(float _y)
+    {
+        xy.x = _y;
+        ClampXYValues();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void SetXValue(float _x)
+    {
+        xy.x = _x;
+        ClampXYValues();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void SetYValue(float _y)
+    {
+        xy.y = _y;
+        ClampXYValues();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetXYValue(float _x, float _y)
     {
         XYValues = new Vector2(_x, _y);
+        ClampXYValues();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void AddXYValue(float _x, float _y)
     {
         XYValues += new Vector2(_x, _y);
-        
-        //keep values between -1 and 1
-        Mathf.Clamp(XYValues.x, -1f, 1f);
-        Mathf.Clamp(XYValues.y, -1f, 1f);
+        ClampXYValues();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void AddXYValue(Vector2 _values)
+    {
+        XYValues += _values;
+        ClampXYValues();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetXYRawValue(Vector2 _values)
@@ -172,6 +201,16 @@ public class InputData
     public void SetArcadeAxis(ArcadeAxis _axis)
     {
         ArcadeAxis = _axis;
+    }
+    #endregion
+
+    #region PRIVATE METHODS
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    void ClampXYValues()
+    {
+        //keep values between -1 and 1
+        Mathf.Clamp(XYValues.x, -1f, 1f);
+        Mathf.Clamp(XYValues.y, -1f, 1f);
     }
     #endregion
 }
