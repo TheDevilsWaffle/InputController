@@ -101,6 +101,11 @@ public class KeyboardInput : MonoBehaviour
     #endregion
 
     #region PRIVATE METHODS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// UpdateDirectionalInput()
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
     void UpdateDirectionalInput(InputStatus _up, InputStatus _right, InputStatus _down, InputStatus _left)
     {
         //up
@@ -137,6 +142,11 @@ public class KeyboardInput : MonoBehaviour
         //EvaluateDirectionalInput
         EvaluateDirectionalInput(XInput.gamepads[player].ls.XYValues);
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// Update()
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
     void EvaluateDirectionalInput(Vector2 _vector)
     {
         //up

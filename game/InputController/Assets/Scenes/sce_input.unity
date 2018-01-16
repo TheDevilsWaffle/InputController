@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 981509159}
   - component: {fileID: 981509158}
   - component: {fileID: 981509160}
+  - component: {fileID: 981509161}
   m_Layer: 0
   m_Name: InputSettings
   m_TagString: Untagged
@@ -143,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48df0f1b875edc4491298db2f0cccfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: 1
   isEnabled: 1
-  players: 1
   triggerDeadZone: 0.2
   analogStickDeadZone: 0.2
   maxHeldDuration: 3
@@ -207,10 +208,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fb2ef3d563cec48ab545a6523a94de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 1
+  player: 1
   up: 119
   right: 100
   down: 115
   left: 97
+  dpad_up: 273
+  dpad_right: 275
+  dpad_down: 274
+  dpad_left: 276
   y: 306
   b: 113
   a: 32
@@ -223,6 +230,20 @@ MonoBehaviour:
   r3: 112
   select: 9
   start: 13
+--- !u!114 &981509161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 981509155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55df45cfec3659640a43b94d64700ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1_Gamepad: {fileID: 981509156}
+  Player1_Keyboard: {fileID: 0}
+  Player1_Mouse: {fileID: 0}
 --- !u!1 &1557411895
 GameObject:
   m_ObjectHideFlags: 0

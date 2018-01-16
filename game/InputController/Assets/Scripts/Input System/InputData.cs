@@ -12,7 +12,8 @@ public enum InputStatus
     RELEASED,
     HELD,
     PRESSED,
-    INACTIVE
+    INACTIVE,
+    HOVER
 };
 public enum ArcadeAxis
 {
@@ -25,6 +26,14 @@ public enum ArcadeAxis
     DOWN_LEFT,
     LEFT,
     UP_LEFT
+};
+public enum XBoxButtons
+{
+    Y, B, A, X,
+    VIEW, MENU,
+    LT, RT, LB, RB,
+    DP_UP, DP_RIGHT, DP_DOWN, DP_LEFT,
+    LS, RS, L3, R3
 };
 #endregion
 
