@@ -1,6 +1,6 @@
 ﻿﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 //AUTHOR — Travis Moore
-//SCRIPT — InputController.cs
+//SCRIPT — #SCRIPTNAME#.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma warning disable 0169
@@ -11,10 +11,13 @@
 using UnityEngine;
 //using UnityEngine.UI;
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 
 #region ENUMS
-
+//public enum EnumStatus
+//{
+//	
+//};
 #endregion
 
 #region EVENTS
@@ -24,12 +27,20 @@ using System.Collections.Generic;
 //}
 #endregion
 
-public class InputController : MonoBehaviour
+public class #SCRIPTNAME# : MonoBehaviour
 {
     #region FIELDS
-    [Header("Players")]
+    [Header("")]
     [SerializeField]
-    public List<Player> players = new List<Player>{};
+    int x;
+
+    [Header("")]
+    [SerializeField]
+    int y;
+
+    [Header("")]
+    [SerializeField]
+    int z;
     #endregion
 
     #region INITIALIZATION
