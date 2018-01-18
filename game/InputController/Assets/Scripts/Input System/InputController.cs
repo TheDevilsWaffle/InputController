@@ -18,15 +18,42 @@ using System.Collections.Generic;
 #endregion
 
 #region EVENTS
-//public class EVENT_EXAMPLE : GameEvent
-//{
-//    public EVENT_EXAMPLE() { }
-//}
+//disable all input
+public class EVENT_INPUT_DISABLE_ALL : GameEvent
+{
+    public EVENT_INPUT_DISABLE_ALL() { }
+}
+//enable all input
+public class EVENT_INPUT_ENABLE_ALL : GameEvent
+{
+    public EVENT_INPUT_ENABLE_ALL() { }
+}
+//disable specific player input
+public class EVENT_INPUT_DISABLE_PLAYER : GameEvent
+{
+    public int playerNumber;
+    public EVENT_INPUT_DISABLE_PLAYER(int _playerNumber) 
+    {
+        playerNumber = _playerNumber;
+    }
+}
+//enable specific player input
+public class EVENT_INPUT_ENABLE_PLAYER : GameEvent
+{
+    public int playerNumber;
+    public EVENT_INPUT_ENABLE_PLAYER(int _playerNumber) 
+    {
+        playerNumber = _playerNumber;
+    }
+}
 #endregion
 
 public class InputController : MonoBehaviour
 {
     #region FIELDS
+    [Header("Enable/Disable")]
+    [SerializeField]
+    bool enableInput = true;
     [Header("Players")]
     [SerializeField]
     public List<Player> players = new List<Player>{};
@@ -53,7 +80,7 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
-        //SetSubscriptions();
+        SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -71,7 +98,10 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void SetSubscriptions()
     {
-        //Events.instance.AddListener<event>(function);
+        Events.instance.AddListener<EVENT_INPUT_ENABLE_ALL>(EnableInputController);        
+        Events.instance.AddListener<EVENT_INPUT_DISABLE_ALL>(DisableInputController);
+        Events.instance.AddListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
+        Events.instance.AddListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
     }
     #endregion
 
@@ -98,7 +128,49 @@ public class InputController : MonoBehaviour
     /// function
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-
+    public void EnableInputController(EVENT_INPUT_ENABLE_ALL _event)
+    {
+        enableInput = true;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// function
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisableInputController(EVENT_INPUT_DISABLE_ALL _event)
+    {
+        enableInput = false;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// function
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void EnablePlayerInput(EVENT_INPUT_ENABLE_PLAYER _event)
+    {
+        players[_event.playerNumber].EnablePlayerInput();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// function
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisablePlayerInput(EVENT_INPUT_DISABLE_PLAYER _event)
+    {
+        players[_event.playerNumber].DisablePlayerInput();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// function
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void InitializePlayers()
+    {
+        foreach(Player _player in players)
+        {
+            _player.InitializePlayer();
+        }
+    }
     #endregion
 
     #region PRIVATE METHODS

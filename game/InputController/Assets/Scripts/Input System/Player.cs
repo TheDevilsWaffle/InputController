@@ -95,6 +95,77 @@ public class Player : MonoBehaviour
     /// DisableInput
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void EnablePlayerInput()
+    {
+        //gamepad
+        if(xInputControllerScript != null)
+        {
+            xInputControllerScript.EnableInput();
+        }
+        //keyboard
+        if(kbInput != null)
+        {
+            //kbInput.EnableInput();
+        }
+        //mouse
+        // if(mouseInput != null)
+        // {
+        //     mouseInput.EnableInput();
+        // }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// DisableInput
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisablePlayerInput()
+    {
+        //gamepad
+        if(xInputControllerScript != null)
+        {
+            xInputControllerScript.DisableInput();
+        }
+        //keyboard
+        if(kbInput != null)
+        {
+            //kbInput.DisableInput();
+        }
+        //mouse
+        // if(mouseInput != null)
+        // {
+        //     mouseInput.DisableInput();
+        // }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// DisableInput
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void InitializePlayer()
+    {
+        //xinput
+        if(xInputControllerScript != null)
+        {
+            xInputControllerScript.InitializeGamepad(playerNumber);
+        }
+
+        //keyboard
+        if(kbInput != null)
+        {
+            //kbInput.InitializeKeyboard();
+        }
+
+        // if(mouseInput != null)
+        // {
+        //     mouseInput.InitializeMouse();
+        // }
+
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// DisableInput
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetInputStatus(InputTypes _inputTypes, bool _status)
     {
         switch (_inputTypes)
