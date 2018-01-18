@@ -49,22 +49,6 @@ public class EVENT_XINPUT_P4 : GameEvent
         gamepad = _gamepad;
     }
 }
-public class EVENT_XINPUT_GAMEPAD_DETECTION_LOST : GameEvent
-{
-    public int playerNumber;
-    public EVENT_XINPUT_GAMEPAD_DETECTION_LOST(int _playerNumber)
-    {
-        playerNumber = _playerNumber;
-    }
-}
-public class EVENT_XINPUT_GAMEPAD_DETECTION_ACQUIRED : GameEvent
-{
-    public int playerNumber;
-    public EVENT_XINPUT_GAMEPAD_DETECTION_ACQUIRED(int _playerNumber)
-    {
-        playerNumber = _playerNumber;
-    }
-}
 #endregion
 
 public class XInput : InputType

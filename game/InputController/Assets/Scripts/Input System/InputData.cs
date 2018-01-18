@@ -7,6 +7,12 @@ using UnityEngine;
 using System.Collections;
 
 #region ENUMS
+public enum InputTypes
+{
+    XINPUT,
+    KEYBOARD,
+    MOUSE
+};
 public enum InputStatus
 {
     RELEASED,
