@@ -56,20 +56,15 @@ public class EVENT_MOUSE_STATUS_UPDATE : GameEvent
 public class Player : MonoBehaviour
 {
     #region FIELDS
-    [Header("Player Number")]
-    [SerializeField]
+    [Header("PLAYER INPUTS")]
     [Range(1,4)]
-    int playerNumber;
+    protected int playerNumber;
 
     [Header("Gamepad")]
-    [SerializeField]
-    protected bool enableXInput;
     [SerializeField]
     XInputController xInputControllerScript;
 
     [Header("Keyboard")]
-    [SerializeField]
-    protected bool enableKBInput;
     [SerializeField]
     KeyboardInput kbInput;
 
@@ -81,83 +76,40 @@ public class Player : MonoBehaviour
     #endregion
 
     #region INITIALIZATION
-    public virtual void Awake()
-    {
-        --playerNumber;
-
-        InitializeXInput();
-    }
+    protected virtual void Awake() { }
     #endregion
-
+    
     #region PUBLIC METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// DisableInput
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void EnablePlayerInput()
+    public void InitializePlayer(int _playerNumber)
     {
-        //gamepad
-        if(xInputControllerScript != null)
-        {
-            xInputControllerScript.EnableInput();
-        }
-        //keyboard
-        if(kbInput != null)
-        {
-            //kbInput.EnableInput();
-        }
-        //mouse
-        // if(mouseInput != null)
-        // {
-        //     mouseInput.EnableInput();
-        // }
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// DisableInput
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisablePlayerInput()
-    {
-        //gamepad
-        if(xInputControllerScript != null)
-        {
-            xInputControllerScript.DisableInput();
-        }
-        //keyboard
-        if(kbInput != null)
-        {
-            //kbInput.DisableInput();
-        }
-        //mouse
-        // if(mouseInput != null)
-        // {
-        //     mouseInput.DisableInput();
-        // }
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// DisableInput
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void InitializePlayer()
-    {
+        //assign player number based on passed List<Player> index
+        playerNumber = _playerNumber;
+        
+        //DEBUG
+        //Debug.Log("InitializePlayer("+_playerNumber+")");
+            
         //xinput
         if(xInputControllerScript != null)
         {
-            xInputControllerScript.InitializeGamepad(playerNumber);
+            //DEBUG
+            //Debug.Log("enabling xInput");
+            xInputControllerScript.InitializeXInput(_playerNumber);
         }
 
         //keyboard
         if(kbInput != null)
         {
-            //kbInput.InitializeKeyboard();
+            //enableKBInput = true;
         }
 
         // if(mouseInput != null)
         // {
-        //     mouseInput.InitializeMouse();
+        //     mouseInput = true;
         // }
 
     }
@@ -168,54 +120,51 @@ public class Player : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetInputStatus(InputTypes _inputTypes, bool _status)
     {
-        switch (_inputTypes)
-        {
-            case InputTypes.XINPUT:
-                enableXInput = _status;
-                //raise event
-                Events.instance.Raise(new EVENT_XINPUT_STATUS_UPDATE(playerNumber, enableXInput));
-                break;
-            case InputTypes.KEYBOARD:
-                enableKBInput = _status;
-                //raise event
-                Events.instance.Raise(new EVENT_KEYBOARD_STATUS_UPDATE(playerNumber, enableKBInput));
-                break;
-            // case InputTypes.MOUSE:
-                // enableMouseInput = _status;
-                //raise event
-                // Events.instance.Raise(new EVENT_MOUSE_STATUS_UPDATE(playerNumber, enableMouseInput));
-                // break;
-            default:
-                Debug.Log("ERROR! Must pass parameter of type 'InputTypes' and/or bool status");
-                break;
-        }
+        // switch (_inputTypes)
+        // {
+        //     case InputTypes.XINPUT:
+        //         //enableXInput = _status;
+        //         //raise event
+        //         Events.instance.Raise(new EVENT_XINPUT_STATUS_UPDATE(playerNumber, enableXInput));
+        //         break;
+        //     case InputTypes.KEYBOARD:
+        //         //enableKBInput = _status;
+        //         //raise event
+        //         Events.instance.Raise(new EVENT_KEYBOARD_STATUS_UPDATE(playerNumber, enableKBInput));
+        //         break;
+        //     // case InputTypes.MOUSE:
+        //         // enableMouseInput = _status;
+        //         //raise event
+        //         // Events.instance.Raise(new EVENT_MOUSE_STATUS_UPDATE(playerNumber, enableMouseInput));
+        //         // break;
+        //     default:
+        //         Debug.Log("ERROR! Must pass parameter of type 'InputTypes' and/or bool status");
+        //         break;
+        // }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// GetInputStatus
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    public bool GetInputStatus(InputTypes _inputTypes)
-    {
-        switch (_inputTypes)
-        {
-            case InputTypes.XINPUT:
-                return enableXInput;
-            case InputTypes.KEYBOARD:
-                return enableKBInput;
-            // case InputTypes.MOUSE:
-            //     return enableMouseInput;
-            default:
-                Debug.Log("ERROR! Must pass parameter of type 'InputTypes'");
-                return false;
-        }
-    }
+    // public bool GetInputStatus(InputTypes _inputTypes)
+    // {
+    //     // switch (_inputTypes)
+    //     // {
+    //     //     case InputTypes.XINPUT:
+    //     //         return enableXInput;
+    //     //     case InputTypes.KEYBOARD:
+    //     //         return enableKBInput;
+    //     //     // case InputTypes.MOUSE:
+    //     //     //     return enableMouseInput;
+    //     //     default:
+    //     //         Debug.Log("ERROR! Must pass parameter of type 'InputTypes'");
+    //     //         return false;
+    //     // }
+    // }
     #endregion
+
     #region PRIVATE METHODS
-    void InitializeXInput()
-    {
-        if(xInputControllerScript != null)
-            xInputControllerScript.InitializeGamepad(playerNumber);
-    }
+
     #endregion
 }

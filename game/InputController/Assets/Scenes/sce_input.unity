@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 29067326}
   - component: {fileID: 29067325}
   - component: {fileID: 29067324}
+  - component: {fileID: 29067327}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -141,6 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbf7c80f446a18488e2f9b173b5f4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xInputControllerScript: {fileID: 0}
+  kbInput: {fileID: 0}
   triggerDeadZone: 0.2
   analogStickDeadZone: 0.2
   maxHeldDuration: 3
@@ -157,10 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8091465288f92498203707f781e998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 1
-  enableXInput: 1
   xInputControllerScript: {fileID: 29067324}
-  enableKBInput: 0
   kbInput: {fileID: 0}
 --- !u!4 &29067326
 Transform:
@@ -175,6 +175,38 @@ Transform:
   m_Father: {fileID: 788116766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &29067327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 29067323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00fb2ef3d563cec48ab545a6523a94de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 119
+  right: 100
+  down: 115
+  left: 97
+  dpad_up: 273
+  dpad_right: 275
+  dpad_down: 274
+  dpad_left: 276
+  y: 306
+  b: 113
+  a: 32
+  x: 101
+  l1: 308
+  l2: 304
+  r1: 307
+  r2: 303
+  l3: 111
+  r3: 112
+  select: 9
+  start: 13
+  playerNumber: 0
 --- !u!1 &788116764
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,9 +237,6 @@ MonoBehaviour:
   enableInput: 1
   players:
   - {fileID: 29067325}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!4 &788116766
 Transform:
   m_ObjectHideFlags: 0

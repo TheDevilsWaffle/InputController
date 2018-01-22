@@ -89,7 +89,10 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Start()
     {
-    
+        if(enableInput)
+        {
+            Events.instance.Raise(new EVENT_INPUT_ENABLE_ALL());
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -98,8 +101,8 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void SetSubscriptions()
     {
-        Events.instance.AddListener<EVENT_INPUT_ENABLE_ALL>(EnableInputController);        
-        Events.instance.AddListener<EVENT_INPUT_DISABLE_ALL>(DisableInputController);
+        Events.instance.AddListener<EVENT_INPUT_ENABLE_ALL>(EnableAllPlayers);        
+        Events.instance.AddListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
         Events.instance.AddListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
         Events.instance.AddListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
     }
@@ -114,7 +117,6 @@ public class InputController : MonoBehaviour
     void Update()
     {
 
-
     #if false
         UpdateTesting();
     #endif
@@ -128,16 +130,17 @@ public class InputController : MonoBehaviour
     /// function
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void EnableInputController(EVENT_INPUT_ENABLE_ALL _event)
+    public void EnableAllPlayers(EVENT_INPUT_ENABLE_ALL _event)
     {
         enableInput = true;
+        InitializePlayers();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// function
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisableInputController(EVENT_INPUT_DISABLE_ALL _event)
+    public void DisableAllPlayers(EVENT_INPUT_DISABLE_ALL _event)
     {
         enableInput = false;
     }
@@ -148,7 +151,7 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void EnablePlayerInput(EVENT_INPUT_ENABLE_PLAYER _event)
     {
-        players[_event.playerNumber].EnablePlayerInput();
+        //players[_event.playerNumber].EnablePlayerInput();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -157,7 +160,7 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void DisablePlayerInput(EVENT_INPUT_DISABLE_PLAYER _event)
     {
-        players[_event.playerNumber].DisablePlayerInput();
+        //players[_event.playerNumber].DisablePlayerInput();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -166,9 +169,13 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void InitializePlayers()
     {
-        foreach(Player _player in players)
+        //loop through players and initialize them (and assign player number based on _index)
+        for(int _index = 0; _index < players.Count; ++_index)
         {
-            _player.InitializePlayer();
+            //DEBUG
+            //Debug.Log("InitializePlayers(), player("+_index+")");
+
+            players[_index].GetComponent<Player>().InitializePlayer(_index);
         }
     }
     #endregion
@@ -191,7 +198,10 @@ public class InputController : MonoBehaviour
     void OnDestroy()
     {
         //remove listeners
-        //Events.instance.RemoveListener<>();
+        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_ALL>(EnableAllPlayers);        
+        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
+        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
+        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
     }
     #endregion
 

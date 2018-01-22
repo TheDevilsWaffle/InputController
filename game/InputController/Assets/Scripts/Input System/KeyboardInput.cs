@@ -11,39 +11,46 @@ using System.Collections.Generic;
 public class KeyboardInput : MonoBehaviour
 {
     #region FIELDS
-    [Header("Enable/Disable")]
-    public bool isEnabled = true;
-    [Header("Player")]
-    [Range(0, 4)]
-    public int player = 1;
-    [Header("Keyboard Controls")]
+    [Header("KEYBOARD CONTROLS")]
+    [Header("keys mapped to xInput (gamepad)")]
+
     [Header("Analog Sticks")]
     public KeyCode up = KeyCode.W;
     public KeyCode right = KeyCode.D;
     public KeyCode down = KeyCode.S;
     public KeyCode left = KeyCode.A;
+
     [Header("DPad")]
     public KeyCode dpad_up = KeyCode.UpArrow;
     public KeyCode dpad_right = KeyCode.RightArrow;
     public KeyCode dpad_down = KeyCode.DownArrow;
     public KeyCode dpad_left = KeyCode.LeftArrow;
+
     [Header("Buttons")]
     public KeyCode y = KeyCode.LeftControl;
     public KeyCode b = KeyCode.Q;
     public KeyCode a = KeyCode.Space;
     public KeyCode x = KeyCode.E;
+
     [Header("Shoulder Buttons")]
     public KeyCode l1 = KeyCode.LeftAlt;
     public KeyCode l2 = KeyCode.LeftShift;
     public KeyCode r1 = KeyCode.RightAlt;
     public KeyCode r2 = KeyCode.RightShift;
+
     [Header("Analog Stick Buttons")]
     public KeyCode l3 = KeyCode.O;
     public KeyCode r3 = KeyCode.P;
-    [Header("Misc")]
+
+    [Header("Misc Buttons")]
     public KeyCode select = KeyCode.Tab;
     public KeyCode start = KeyCode.Return;
+
     [HideInInspector]
+    
+    [Range(0, 4)]
+    public int playerNumber;
+    bool enableKeyboard;
     public static Dictionary<KeyCode, InputStatus> keys;
     private List<KeyCode> keysList;
     #endregion
@@ -56,11 +63,8 @@ public class KeyboardInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
-        if(isEnabled)
+        if(enableKeyboard)
         {
-            //correct player number to use as index for gamepads
-            --player;
-
             //create keys dictionary and list (list needed to traverse dictionary and update dictionary value(cannot update value by reference))
             keys = new Dictionary<KeyCode, InputStatus>();
             
@@ -78,7 +82,7 @@ public class KeyboardInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void Update()
     {
-        if(isEnabled)
+        if(enableKeyboard)
         {
             //go through the keyboard input update loop
             UpdateKeyboardInput();
@@ -90,12 +94,12 @@ public class KeyboardInput : MonoBehaviour
             //    }
 
             //DEBUG KEYBOARD -> GAMEPAD INPUT CHECK
-            //Debug.Log("DPAD_UP = " + XInput.gamepads[player].dp_up.Status);
-            //Debug.Log("DPAD_RIGHT = " + XInput.gamepads[player].dp_right.Status);
-            //Debug.Log("DPAD_DOWN = " + XInput.gamepads[player].dp_down.Status);
-            //Debug.Log("DPAD_LEFT = " + XInput.gamepads[player].dp_left.Status);
+            //Debug.Log("DPAD_UP = " + XInput.gamepads[playerNumber].dp_up.Status);
+            //Debug.Log("DPAD_RIGHT = " + XInput.gamepads[playerNumber].dp_right.Status);
+            //Debug.Log("DPAD_DOWN = " + XInput.gamepads[playerNumber].dp_down.Status);
+            //Debug.Log("DPAD_LEFT = " + XInput.gamepads[playerNumber].dp_left.Status);
             
-            //Debug.Log("LS XYVALUES( "+ XInput.gamepads[player].ls.XYValues.x +", "+ XInput.gamepads[player].ls.XYValues.y +"/n ANGLE("+XInput.gamepads[player].ls.Angle+")/n ARCADEAXIS("+XInput.gamepads[player].ls.ArcadeAxis+")");
+            //Debug.Log("LS XYVALUES( "+ XInput.gamepads[playerNumber].ls.XYValues.x +", "+ XInput.gamepads[playerNumber].ls.XYValues.y +"/n ANGLE("+XInput.gamepads[playerNumber].ls.Angle+")/n ARCADEAXIS("+XInput.gamepads[playerNumber].ls.ArcadeAxis+")");
         }
     }
     #endregion
@@ -111,36 +115,36 @@ public class KeyboardInput : MonoBehaviour
         //up
         if (_up == InputStatus.PRESSED || _up == InputStatus.HELD)
         {
-            XInput.gamepads[player].ls.AddYValue(1f);
+            XInput.gamepads[playerNumber].ls.AddYValue(1f);
         }
         //right
         if (_right == InputStatus.PRESSED || _right == InputStatus.HELD)
         {
-            XInput.gamepads[player].ls.AddXValue(1f);
+            XInput.gamepads[playerNumber].ls.AddXValue(1f);
         }
         //down
         if (_down == InputStatus.PRESSED || _down == InputStatus.HELD)
         {
-            XInput.gamepads[player].ls.AddYValue(-1f);
+            XInput.gamepads[playerNumber].ls.AddYValue(-1f);
         }
         //left
         if (_left == InputStatus.PRESSED || _left == InputStatus.HELD)
         {
-            XInput.gamepads[player].ls.AddXValue(-1f);
+            XInput.gamepads[playerNumber].ls.AddXValue(-1f);
         }
         //edge cases
         if(_up == _down)
         {
-            XInput.gamepads[player].ls.SetYValue(0f);
+            XInput.gamepads[playerNumber].ls.SetYValue(0f);
             //keys[left].value == InputStatus.INACTIVE;
         }
         if(_left == _right)
         {
-            XInput.gamepads[player].ls.SetXValue(0f);
+            XInput.gamepads[playerNumber].ls.SetXValue(0f);
         }
 
         //EvaluateDirectionalInput
-        EvaluateDirectionalInput(XInput.gamepads[player].ls.XYValues);
+        EvaluateDirectionalInput(XInput.gamepads[playerNumber].ls.XYValues);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -152,64 +156,64 @@ public class KeyboardInput : MonoBehaviour
         //up
         if(_vector == new Vector2(0f, 1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP);
-            XInput.gamepads[player].ls.SetAngle(-90f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.UP);
+            XInput.gamepads[playerNumber].ls.SetAngle(-90f);
             return;
         }
         //up_left
         if (_vector == new Vector2(-1f, 1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP_LEFT);
-            XInput.gamepads[player].ls.SetAngle(-135f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.UP_LEFT);
+            XInput.gamepads[playerNumber].ls.SetAngle(-135f);
             return;
         }
         //up_right
         if(_vector == new Vector2(1f, 1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.UP_RIGHT);
-            XInput.gamepads[player].ls.SetAngle(-45f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.UP_RIGHT);
+            XInput.gamepads[playerNumber].ls.SetAngle(-45f);
             return;
         }
         //right
         if (_vector == new Vector2(1f, 0f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.RIGHT);
-            XInput.gamepads[player].ls.SetAngle(0f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.RIGHT);
+            XInput.gamepads[playerNumber].ls.SetAngle(0f);
             return;
         }
         //down
         if (_vector == new Vector2(0f, -1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN);
-            XInput.gamepads[player].ls.SetAngle(90f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.DOWN);
+            XInput.gamepads[playerNumber].ls.SetAngle(90f);
             return;
         }
         //down left
         if (_vector == new Vector2(-1f, -1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN_LEFT);
-            XInput.gamepads[player].ls.SetAngle(135f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.DOWN_LEFT);
+            XInput.gamepads[playerNumber].ls.SetAngle(135f);
             return;
         }
         //down_right
         if (_vector == new Vector2(1f, -1f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.DOWN_RIGHT);
-            XInput.gamepads[player].ls.SetAngle(-45f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.DOWN_RIGHT);
+            XInput.gamepads[playerNumber].ls.SetAngle(-45f);
             return;
         }
         //left
         if (_vector == new Vector2(-1f, 0f))
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.LEFT);
-            XInput.gamepads[player].ls.SetAngle(-180f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.LEFT);
+            XInput.gamepads[playerNumber].ls.SetAngle(-180f);
             return;
         }
         //inactive
         else
         {
-            XInput.gamepads[player].ls.SetArcadeAxis(ArcadeAxis.INACTIVE);
-            XInput.gamepads[player].ls.SetAngle(0f);
+            XInput.gamepads[playerNumber].ls.SetArcadeAxis(ArcadeAxis.INACTIVE);
+            XInput.gamepads[playerNumber].ls.SetAngle(0f);
             return;
         }
     }
@@ -288,7 +292,7 @@ public class KeyboardInput : MonoBehaviour
    
     // void SetStatus(XInputData _button, InputStatus _status, int _x, int _y, float _duration)
     // {
-    //     XInput.gamepads[player].
+    //     XInput.gamepads[playerNumber].
     //     gamepads[_index].dp_up.SetStatus(InputStatus.RELEASED);
     //     gamepads[_index].dp_up.SetXYValue(0f, 0f);
     //     gamepads[_index].dp_up.SetInactiveDuration(Time.deltaTime);
@@ -351,39 +355,39 @@ public class KeyboardInput : MonoBehaviour
         if(_key == dpad_up)
         {
             //do not override the gamepad itself
-            if(XInput.gamepads[player].dp_up.Status == InputStatus.INACTIVE)
+            if(XInput.gamepads[playerNumber].dp_up.Status == InputStatus.INACTIVE)
             {
                 //first set status, then update data based upon status
-                XInput.gamepads[player].dp_up.SetStatus(_status);
+                XInput.gamepads[playerNumber].dp_up.SetStatus(_status);
                 //RELEASED
                 if (_status == InputStatus.RELEASED)
                 {
-                    XInput.gamepads[player].dp_up.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_up.SetInactiveDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_up.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_up.SetInactiveDuration(Time.deltaTime);
 
                 }
                 //HELD
                 else if(_status == InputStatus.HELD)
                 {
-                    XInput.gamepads[player].dp_up.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_up.SetHeldDuration(Time.deltaTime);
-                    XInput.gamepads[player].dp_up.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_up.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_up.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_up.SetInactiveDuration(0f);
                 }
                 //PRESSED
                 else if (_status == InputStatus.PRESSED)
                 {
-                    XInput.gamepads[player].dp_up.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_up.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_up.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_up.SetHeldDuration(Time.deltaTime);
 
                     //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
-                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    //XInput.UpdateCombo(playerNumber, XInput.gamepads[playerNumber].dp_up);
                 }
                 //INACTIVE
                 else
                 {
-                    XInput.gamepads[player].dp_up.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_up.SetHeldDuration(0f);
-                    XInput.gamepads[player].dp_up.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_up.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_up.SetHeldDuration(0f);
+                    XInput.gamepads[playerNumber].dp_up.SetInactiveDuration(0f);
                 }
             }
         }
@@ -391,39 +395,39 @@ public class KeyboardInput : MonoBehaviour
         if (_key == dpad_right)
         {
             //do not override the gamepad itself
-            if (XInput.gamepads[player].dp_right.Status == InputStatus.INACTIVE)
+            if (XInput.gamepads[playerNumber].dp_right.Status == InputStatus.INACTIVE)
             {
                 //first set status, then update data based upon status
-                XInput.gamepads[player].dp_right.SetStatus(_status);
+                XInput.gamepads[playerNumber].dp_right.SetStatus(_status);
                 //RELEASED
                 if (_status == InputStatus.RELEASED)
                 {
-                    XInput.gamepads[player].dp_right.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_right.SetInactiveDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_right.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_right.SetInactiveDuration(Time.deltaTime);
 
                 }
                 //HELD
                 else if (_status == InputStatus.HELD)
                 {
-                    XInput.gamepads[player].dp_right.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_right.SetHeldDuration(Time.deltaTime);
-                    XInput.gamepads[player].dp_right.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_right.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_right.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_right.SetInactiveDuration(0f);
                 }
                 //PRESSED
                 else if (_status == InputStatus.PRESSED)
                 {
-                    XInput.gamepads[player].dp_right.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_right.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_right.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_right.SetHeldDuration(Time.deltaTime);
 
                     //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
-                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    //XInput.UpdateCombo(playerNumber, XInput.gamepads[playerNumber].dp_up);
                 }
                 //INACTIVE
                 else
                 {
-                    XInput.gamepads[player].dp_right.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_right.SetHeldDuration(0f);
-                    XInput.gamepads[player].dp_right.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_right.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_right.SetHeldDuration(0f);
+                    XInput.gamepads[playerNumber].dp_right.SetInactiveDuration(0f);
                 }
             }
         }
@@ -431,39 +435,39 @@ public class KeyboardInput : MonoBehaviour
         if (_key == dpad_down)
         {
             //do not override the gamepad itself
-            if (XInput.gamepads[player].dp_down.Status == InputStatus.INACTIVE)
+            if (XInput.gamepads[playerNumber].dp_down.Status == InputStatus.INACTIVE)
             {
                 //first set status, then update data based upon status
-                XInput.gamepads[player].dp_down.SetStatus(_status);
+                XInput.gamepads[playerNumber].dp_down.SetStatus(_status);
                 //RELEASED
                 if (_status == InputStatus.RELEASED)
                 {
-                    XInput.gamepads[player].dp_down.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_down.SetInactiveDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_down.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_down.SetInactiveDuration(Time.deltaTime);
 
                 }
                 //HELD
                 else if (_status == InputStatus.HELD)
                 {
-                    XInput.gamepads[player].dp_down.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_down.SetHeldDuration(Time.deltaTime);
-                    XInput.gamepads[player].dp_down.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_down.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_down.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_down.SetInactiveDuration(0f);
                 }
                 //PRESSED
                 else if (_status == InputStatus.PRESSED)
                 {
-                    XInput.gamepads[player].dp_down.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_down.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_down.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_down.SetHeldDuration(Time.deltaTime);
 
                     //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
-                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    //XInput.UpdateCombo(playerNumber, XInput.gamepads[playerNumber].dp_up);
                 }
                 //INACTIVE
                 else
                 {
-                    XInput.gamepads[player].dp_down.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_down.SetHeldDuration(0f);
-                    XInput.gamepads[player].dp_down.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_down.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_down.SetHeldDuration(0f);
+                    XInput.gamepads[playerNumber].dp_down.SetInactiveDuration(0f);
                 }
             }
         }
@@ -471,39 +475,39 @@ public class KeyboardInput : MonoBehaviour
         if (_key == dpad_left)
         {
             //do not override the gamepad itself
-            if (XInput.gamepads[player].dp_left.Status == InputStatus.INACTIVE)
+            if (XInput.gamepads[playerNumber].dp_left.Status == InputStatus.INACTIVE)
             {
                 //first set status, then update data based upon status
-                XInput.gamepads[player].dp_left.SetStatus(_status);
+                XInput.gamepads[playerNumber].dp_left.SetStatus(_status);
                 //RELEASED
                 if (_status == InputStatus.RELEASED)
                 {
-                    XInput.gamepads[player].dp_left.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_left.SetInactiveDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_left.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_left.SetInactiveDuration(Time.deltaTime);
 
                 }
                 //HELD
                 else if (_status == InputStatus.HELD)
                 {
-                    XInput.gamepads[player].dp_left.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_left.SetHeldDuration(Time.deltaTime);
-                    XInput.gamepads[player].dp_left.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_left.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_left.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_left.SetInactiveDuration(0f);
                 }
                 //PRESSED
                 else if (_status == InputStatus.PRESSED)
                 {
-                    XInput.gamepads[player].dp_left.SetXYValue(1f, 1f);
-                    XInput.gamepads[player].dp_left.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].dp_left.SetXYValue(1f, 1f);
+                    XInput.gamepads[playerNumber].dp_left.SetHeldDuration(Time.deltaTime);
 
                     //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
-                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    //XInput.UpdateCombo(playerNumber, XInput.gamepads[playerNumber].dp_up);
                 }
                 //INACTIVE
                 else
                 {
-                    XInput.gamepads[player].dp_left.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].dp_left.SetHeldDuration(0f);
-                    XInput.gamepads[player].dp_left.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].dp_left.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].dp_left.SetHeldDuration(0f);
+                    XInput.gamepads[playerNumber].dp_left.SetInactiveDuration(0f);
                 }
             }
         }
@@ -517,7 +521,7 @@ public class KeyboardInput : MonoBehaviour
         if (_key == left)
         {
             //do not override the gamepad itself
-            if (XInput.gamepads[player].ls.Status == InputStatus.INACTIVE)
+            if (XInput.gamepads[playerNumber].ls.Status == InputStatus.INACTIVE)
             {   
                 //temporarily save the status of this key
                 _leftStatus = _status;
@@ -525,37 +529,37 @@ public class KeyboardInput : MonoBehaviour
 
 
                 //set ls status, then update data based upon status
-                XInput.gamepads[player].ls.SetStatus(_status);
+                XInput.gamepads[playerNumber].ls.SetStatus(_status);
 
                 //RELEASED
                 if (_status == InputStatus.RELEASED)
                 {
-                    XInput.gamepads[player].ls.AddXYValue(0f, 0f);
-                    XInput.gamepads[player].ls.SetInactiveDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].ls.AddXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetInactiveDuration(Time.deltaTime);
 
                 }
                 //HELD
                 else if (_status == InputStatus.HELD)
                 {
-                    XInput.gamepads[player].ls.AddXYValue(-1f, 0f);
-                    XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
-                    XInput.gamepads[player].ls.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].ls.AddXYValue(-1f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].ls.SetInactiveDuration(0f);
                 }
                 //PRESSED
                 else if (_status == InputStatus.PRESSED)
                 {
-                    XInput.gamepads[player].ls.AddXYValue(-1f, 0f);
-                    XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].ls.AddXYValue(-1f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetHeldDuration(Time.deltaTime);
 
                     //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
-                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    //XInput.UpdateCombo(playerNumber, XInput.gamepads[playerNumber].dp_up);
                 }
                 //INACTIVE
                 else
                 {
-                    XInput.gamepads[player].ls.AddXYValue(0f, 0f);
-                    XInput.gamepads[player].ls.SetHeldDuration(0f);
-                    XInput.gamepads[player].ls.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].ls.AddXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetHeldDuration(0f);
+                    XInput.gamepads[playerNumber].ls.SetInactiveDuration(0f);
                 }
             }
         }
@@ -564,7 +568,7 @@ public class KeyboardInput : MonoBehaviour
         {
 
             //do not override the gamepad itself
-            if (XInput.gamepads[player].ls.Status == InputStatus.INACTIVE)
+            if (XInput.gamepads[playerNumber].ls.Status == InputStatus.INACTIVE)
             {
                 //temporarily save the status of this key
                 _rightStatus = _status;
@@ -572,38 +576,38 @@ public class KeyboardInput : MonoBehaviour
 
 
                 //first set status, then update data based upon status
-                XInput.gamepads[player].ls.SetStatus(_status);
+                XInput.gamepads[playerNumber].ls.SetStatus(_status);
 
                 //RELEASED
                 if (_status == InputStatus.RELEASED)
                 {
-                    XInput.gamepads[player].ls.AddXYValue(1f, 0f);
-                    XInput.gamepads[player].ls.SetInactiveDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].ls.AddXYValue(1f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetInactiveDuration(Time.deltaTime);
 
                 }
                 //HELD
                 else if (_status == InputStatus.HELD)
                 {
                     //IMPORTANT! --> this will need to be set after up,left,right,down are checked.
-                    XInput.gamepads[player].ls.AddXYValue(1f, 0f);
-                    XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
-                    XInput.gamepads[player].ls.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].ls.AddXYValue(1f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].ls.SetInactiveDuration(0f);
                 }
                 //PRESSED
                 else if (_status == InputStatus.PRESSED)
                 {
-                    XInput.gamepads[player].ls.SetXYValue(1f, 0f);
-                    XInput.gamepads[player].ls.SetHeldDuration(Time.deltaTime);
+                    XInput.gamepads[playerNumber].ls.SetXYValue(1f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetHeldDuration(Time.deltaTime);
 
                     //IMPORTANT - MAKE EVENT CALL FOR UPDATE COMBO AND MOVE STATUS UPDATES IN XINPUT TO ONLY 1 LINE PER BUTTON/STICK/ETC.
-                    //XInput.UpdateCombo(player, XInput.gamepads[player].dp_up);
+                    //XInput.UpdateCombo(playerNumber, XInput.gamepads[playerNumber].dp_up);
                 }
                 //INACTIVE
                 else
                 {
-                    XInput.gamepads[player].ls.SetXYValue(0f, 0f);
-                    XInput.gamepads[player].ls.SetHeldDuration(0f);
-                    XInput.gamepads[player].ls.SetInactiveDuration(0f);
+                    XInput.gamepads[playerNumber].ls.SetXYValue(0f, 0f);
+                    XInput.gamepads[playerNumber].ls.SetHeldDuration(0f);
+                    XInput.gamepads[playerNumber].ls.SetInactiveDuration(0f);
                 }
             }
         }

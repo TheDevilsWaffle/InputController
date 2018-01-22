@@ -50,7 +50,7 @@ public class EVENT_XINPUT_UPDATE : GameEvent
 }
 #endregion
 
-public class XInputController : MonoBehaviour
+public class XInputController : Player
 {
     #region FIELDS
     [Header("DEAD ZONES")]
@@ -61,17 +61,15 @@ public class XInputController : MonoBehaviour
     [SerializeField]
     float analogStickDeadZone = 0.2f;
 
-    [Header("MAX")]
+    [Header("OPTIONS")]
     [SerializeField]
     float maxHeldDuration = 3f;
     [SerializeField]
     float maxInactiveDuration = 3f;
     [SerializeField]
     int maxButtonsRemembered = 10;
-
-    int playerNumber;
-    bool enableXInput;
-    bool gamepadReady;
+ 
+    bool gamepadReady = false;
 
     //arcade axis values
     float up = -90f;
@@ -84,6 +82,7 @@ public class XInputController : MonoBehaviour
     float up_left = -135f;
     float axisLimit = 22.5f;
 
+    bool enableXInput = false;
     XInputData data;
     GamePadState previous;
     GamePadState current;
@@ -97,11 +96,8 @@ public class XInputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void OnValidate()
     {
-        //refs
-
         //initial values
         data = new XInputData();
-
         up = -90f;
         up_right = -45f;
         right = 0f;
@@ -111,16 +107,17 @@ public class XInputController : MonoBehaviour
         left = -180f;
         up_left = -135f;
         axisLimit = 22.5f;
-
+        enableXInput = false;
+        gamepadReady = false;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
     /// Awake
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    void Awake()
+    protected override void Awake()
     {
-        //check to see if this script has been assigned in parent
+        //set subscriptions to specifc events
         SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,47 +164,38 @@ public class XInputController : MonoBehaviour
                 UpdateBumpers();
                 UpdateTriggers();
 
-                Debug.Log(data.a.ID +"is = "+ data.a.Status);
-
                 //broadcast event with updated gamepad information for current gamepad
                 Broadcast();
             }
             //gamepad is not detected, 
             else
             {
+                CheckForGamepad();
                 Events.instance.Raise(new EVENT_XINPUT_GAMEPAD_DETECTION_LOST(playerNumber));
             }
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        //DEBUG TESTING
+        #if false
+
+        Debug.Log(data.a.ID +"is = "+ data.a.Status);
+        Debug.Log(data.b.ID +"is = "+ data.b.Status);
+        Debug.Log(data.ls.ID +"is = "+ data.ls.Status);
+        Debug.Log(data.lt.ID +"is = "+ data.lt.Status);
         
-    
+        #endif
+        ///////////////////////////////////////////////////////////////////////////////////////////////
     }
     #endregion
 
     #region PUBLIC METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// function
+    /// desc
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void EnableInput()
-    {
-        enableXInput = true;
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisableInput()
-    {
-        enableXInput = false;
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void InitializeGamepad(int _playerNumber)
+    public void InitializeXInput(int _playerNumber)
     {
         playerNumber = _playerNumber;
         enableXInput = true;
@@ -222,10 +210,16 @@ public class XInputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     bool CheckForGamepad()
     {
+        //DEBUG
+        //Debug.Log("CheckForGamepad() using gamepad index("+playerNumber+")");
+
         //ensure that this gamepad is still connected
         GamePadState _testState = GamePad.GetState((PlayerIndex)playerNumber);
         if (_testState.IsConnected && !gamepadReady)
         {
+            //DEBUG
+            //Debug.Log("CheckForGamepad() using gamepad index("+playerNumber+")");
+        
             gamepadReady = true;
             //raise event, gamepad acquired
             Events.instance.Raise(new EVENT_XINPUT_GAMEPAD_DETECTION_ACQUIRED(playerNumber));
