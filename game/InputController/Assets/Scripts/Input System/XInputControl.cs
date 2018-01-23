@@ -30,47 +30,77 @@ using System.Collections;
 
 
 [System.Serializable]
-public class InputAction
+public class InputStatusAction
 {
-    [Header("Pressed")]
     [SerializeField]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate upon being pressed")]
     InputActionBase onPressed;
 
-    [Header("Held")]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate upon being held")]
     [SerializeField]
     InputActionBase onHeld;
-    [SerializeField]
-    float heldTimeThreshold = 0f;
-    float onHeldTimer = 0f;
-    [SerializeField]
-    bool repeatHeldAction = false;
 
-    [Header("Released")]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate upon being released")]
     [SerializeField]
     InputActionBase onReleased;
 
-    [Header("Inactive")]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate when inactive")]
     [SerializeField]
     InputActionBase onInactive;
-
 }
 
 public class XInputControl : MonoBehaviour
 {
     #region FIELDS
-    [Header("XINPUT CONTROLS")]
-    [Header("Buttons")]
-    public InputAction a;
-    public InputAction x;
-    public InputAction y;
-    public InputAction b;
+    [Header("GAMEPAD/CONTROLLER")]
 
     [Header("Analog Sticks")]
-    public InputAction ls;
-    public InputAction l3;
-    public InputAction rs;
-    public InputAction r3;
+    [SerializeField]
+    InputStatusAction leftStick;
+    [SerializeField]
+    InputStatusAction l3;
+    [SerializeField]
+    InputStatusAction rightStick;
+    [SerializeField]
+    InputStatusAction r3;
 
+    [Header("D-Pad")]
+    [SerializeField]
+    InputStatusAction up;
+    [SerializeField]
+    InputStatusAction right;
+    [SerializeField]
+    InputStatusAction down;
+    [SerializeField]
+    InputStatusAction left;
+
+    [Header("Buttons")]
+    [SerializeField]
+    InputStatusAction a;
+    [SerializeField]
+    InputStatusAction x;
+    [SerializeField]
+    InputStatusAction y;
+    [SerializeField]
+    InputStatusAction b;
+
+    [Header("Misc. Buttons")]
+    [SerializeField]
+    InputStatusAction view;
+    [SerializeField]
+    InputStatusAction menu;
+
+    [Header("Bumpers")]
+    [SerializeField]
+    InputStatusAction leftBumper;
+    [SerializeField]
+    InputStatusAction rightBumper;
+
+    [Header("Triggers")]
+    [SerializeField]
+    InputStatusAction leftTrigger;
+    [SerializeField]
+    InputStatusAction rightTrigger;
     #endregion
 
     //#region INITIALIZATION
