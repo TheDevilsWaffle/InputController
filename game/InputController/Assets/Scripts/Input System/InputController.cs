@@ -19,6 +19,14 @@ using System.Collections.Generic;
 
 #region EVENTS
 //disable all input
+public class EVENT_INPUT_INITIALIZE_XINPUT : GameEvent
+{
+    public int numberOfPlayers;
+    public EVENT_INPUT_INITIALIZE_XINPUT(int _numberOfPlayers)
+    {
+        numberOfPlayers = _numberOfPlayers;
+    }
+}
 public class EVENT_INPUT_DISABLE_ALL : GameEvent
 {
     public EVENT_INPUT_DISABLE_ALL() { }
@@ -48,15 +56,26 @@ public class EVENT_INPUT_ENABLE_PLAYER : GameEvent
 }
 #endregion
 
+[RequireComponent(typeof(XInput))]
+
 public class InputController : MonoBehaviour
 {
     #region FIELDS
+
     [Header("Enable/Disable")]
     [SerializeField]
     bool enableInput = true;
     [Header("Players")]
     [SerializeField]
-    public List<Player> players = new List<Player>{};
+    [Range(1,4)]
+    int numberOfPlayers = 1;
+    [SerializeField]
+    bool gamepadSupport;
+    [SerializeField]
+    bool keyboardSupport;
+    [SerializeField]
+    bool mouseSupport;
+
     #endregion
 
     #region INITIALIZATION
@@ -80,6 +99,8 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
+        InitializeSupportedInputs();
+
         SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,6 +126,14 @@ public class InputController : MonoBehaviour
         Events.instance.AddListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
         Events.instance.AddListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
         Events.instance.AddListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
+    }
+
+    void InitializeSupportedInputs()
+    {
+        if(gamepadSupport)
+        {
+            Events.instance.Raise(new EVENT_INPUT_INITIALIZE_XINPUT(numberOfPlayers));
+        }
     }
     #endregion
 
@@ -133,7 +162,6 @@ public class InputController : MonoBehaviour
     public void EnableAllPlayers(EVENT_INPUT_ENABLE_ALL _event)
     {
         enableInput = true;
-        InitializePlayers();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -162,31 +190,11 @@ public class InputController : MonoBehaviour
     {
         //players[_event.playerNumber].DisablePlayerInput();
     }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void InitializePlayers()
-    {
-        //loop through players and initialize them (and assign player number based on _index)
-        for(int _index = 0; _index < players.Count; ++_index)
-        {
-            //DEBUG
-            //Debug.Log("InitializePlayers(), player("+_index+")");
 
-            players[_index].GetComponent<Player>().InitializePlayer(_index);
-        }
-    }
     #endregion
 
     #region PRIVATE METHODS
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     #endregion
 
     #region ONDESTORY
