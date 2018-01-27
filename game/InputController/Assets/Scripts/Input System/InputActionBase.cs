@@ -9,7 +9,7 @@ using UnityEngine;
 using System.Collections;
 //using System.Collections.Generic;
 
-public class InputActionBase : MonoBehaviour
+public class InputAction : MonoBehaviour
 {
     public virtual void Awake(){}
     public virtual void Start(){}

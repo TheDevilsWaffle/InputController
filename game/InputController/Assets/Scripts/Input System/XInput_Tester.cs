@@ -30,9 +30,7 @@ using System.Collections.Generic;
 public class XInput_Tester : MonoBehaviour
 {
     #region FIELDS
-    [Header("")]
-    [SerializeField]
-    XBoxButtons button;
+    
     #endregion
 
     #region INITIALIZATION
@@ -75,7 +73,7 @@ public class XInput_Tester : MonoBehaviour
     void SetSubscriptions()
     {
         //Events.instance.AddListener<event>(function);
-        Events.instance.AddListener<EVENT_XINPUT_P1>(SaySomething);
+        Events.instance.AddListener<EVENT_INPUT_XINPUT_UPDATE>(SaySomething);
     }
     #endregion
 
@@ -110,9 +108,9 @@ public class XInput_Tester : MonoBehaviour
     /// function
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    void SaySomething(EVENT_XINPUT_P1 _event)
+    void SaySomething(EVENT_INPUT_XINPUT_UPDATE _event)
     {
-        if(_event.gamepad.a.Status == InputStatus.PRESSED)
+        if(_event.xInputdata.a.Status == InputStatus.PRESSED)
         {
             Debug.Log("heeeeeeeeeeeeeeey!");
         }
@@ -128,7 +126,7 @@ public class XInput_Tester : MonoBehaviour
     void OnDestroy()
     {
         //remove listeners
-        //Events.instance.RemoveListener<>();
+        Events.instance.RemoveListener<EVENT_INPUT_XINPUT_UPDATE>(SaySomething);
     }
     #endregion
 

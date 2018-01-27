@@ -21,10 +21,10 @@ using System.Collections.Generic;
 //disable all input
 public class EVENT_INPUT_INITIALIZE_XINPUT : GameEvent
 {
-    public int numberOfPlayers;
-    public EVENT_INPUT_INITIALIZE_XINPUT(int _numberOfPlayers)
+    public int players;
+    public EVENT_INPUT_INITIALIZE_XINPUT(int _players)
     {
-        numberOfPlayers = _numberOfPlayers;
+        players = _players;
     }
 }
 public class EVENT_INPUT_DISABLE_ALL : GameEvent
@@ -68,7 +68,7 @@ public class InputController : MonoBehaviour
     [Header("Players")]
     [SerializeField]
     [Range(1,4)]
-    int numberOfPlayers = 1;
+    public static int players = 1;
     [SerializeField]
     bool gamepadSupport;
     [SerializeField]
@@ -127,12 +127,16 @@ public class InputController : MonoBehaviour
         Events.instance.AddListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
         Events.instance.AddListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
     }
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// InitializeSupportedInputs
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     void InitializeSupportedInputs()
     {
         if(gamepadSupport)
         {
-            Events.instance.Raise(new EVENT_INPUT_INITIALIZE_XINPUT(numberOfPlayers));
+            Events.instance.Raise(new EVENT_INPUT_INITIALIZE_XINPUT(players));
         }
     }
     #endregion

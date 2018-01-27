@@ -33,20 +33,20 @@ using System.Collections;
 public class InputStatusAction
 {
     [SerializeField]
-    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate upon being pressed")]
-    InputActionBase onPressed;
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputAction' class to activate upon being pressed")]
+    InputAction onPressed;
 
-    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate upon being held")]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputAction' class to activate upon being held")]
     [SerializeField]
-    InputActionBase onHeld;
+    InputAction onHeld;
 
-    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate upon being released")]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputAction' class to activate upon being released")]
     [SerializeField]
-    InputActionBase onReleased;
+    InputAction onReleased;
 
-    [Tooltip("Drag-and-drop a script that inherits from the 'InputActionBase' class to activate when inactive")]
+    [Tooltip("Drag-and-drop a script that inherits from the 'InputAction' class to activate when inactive")]
     [SerializeField]
-    InputActionBase onInactive;
+    InputAction onInactive;
 }
 
 public class XInputControl : MonoBehaviour
