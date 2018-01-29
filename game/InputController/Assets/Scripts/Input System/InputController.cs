@@ -68,6 +68,7 @@ public class InputController : MonoBehaviour
     [Header("Players")]
     [SerializeField]
     [Range(1,4)]
+    int numberOfPlayers;
     public static int players = 1;
     [SerializeField]
     bool gamepadSupport;
@@ -99,8 +100,7 @@ public class InputController : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
-        InitializeSupportedInputs();
-
+        players = numberOfPlayers;
         SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +113,7 @@ public class InputController : MonoBehaviour
         if(enableInput)
         {
             Events.instance.Raise(new EVENT_INPUT_ENABLE_ALL());
+            InitializeSupportedInputs();
         }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,6 +130,19 @@ public class InputController : MonoBehaviour
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
+    /// OnDestroy
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    void OnDestroy()
+    {
+        //remove listeners
+        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_ALL>(EnableAllPlayers);        
+        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
+        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
+        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
     /// InitializeSupportedInputs
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,6 +150,7 @@ public class InputController : MonoBehaviour
     {
         if(gamepadSupport)
         {
+            Debug.Log("InitializeSupportedInputs() xinput for "+ players +" number of players");
             Events.instance.Raise(new EVENT_INPUT_INITIALIZE_XINPUT(players));
         }
     }
@@ -199,22 +214,6 @@ public class InputController : MonoBehaviour
 
     #region PRIVATE METHODS
     
-    #endregion
-
-    #region ONDESTORY
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// OnDestroy
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    void OnDestroy()
-    {
-        //remove listeners
-        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_ALL>(EnableAllPlayers);        
-        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
-        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
-        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
-    }
     #endregion
 
     #region TESTING

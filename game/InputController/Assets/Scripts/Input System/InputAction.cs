@@ -3,15 +3,12 @@
 //SCRIPT — InputActionBase.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 using UnityEngine;
-//using UnityEngine.UI;
 using System.Collections;
-//using System.Collections.Generic;
 
 public class InputAction : MonoBehaviour
 {
-    public virtual void Awake(){}
-    public virtual void Start(){}
-    public virtual void Activate(){}
+    protected virtual void Awake(){}
+    protected virtual void Start(){}
+    public virtual void Activate(InputData _data){ }
 }

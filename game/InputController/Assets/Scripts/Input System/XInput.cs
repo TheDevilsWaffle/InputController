@@ -168,6 +168,8 @@ public class XInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void InitializeXInput(EVENT_INPUT_INITIALIZE_XINPUT _event)
     {
+        //DEBUG
+        Debug.Log("InitializeXInput() for "+_event.players+" number of players");
         enableXInput = true;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -932,7 +934,7 @@ public class XInput : MonoBehaviour
     void Broadcast(int _player, XInputData _data)
     {
         //DEBUG - Event broadcast
-        //Debug.Log("TEST - Event Broadcast("+_index +")");
+        Debug.Log("TEST - Event Broadcast(PLAYER("+_player +"): a button = "+_data.a.Status);
 
        Events.instance.Raise(new EVENT_INPUT_XINPUT_UPDATE(_player, data));
     }
