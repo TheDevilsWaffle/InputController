@@ -125,7 +125,7 @@ public class XInputControl : MonoBehaviour
     void Awake()
     {
         //correct player value for list index
-
+        --player;
        SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,9 +148,11 @@ public class XInputControl : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void UpdateInputActions(EVENT_INPUT_XINPUT_UPDATE _event)
     {
-        Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputdata.a.Status);
+        //DEBUG
+        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputdata.a.Status);
+
         //check if this is the right player
-        if(_event.player == --player)
+        if(_event.player == player)
         {
             //buttons
             #region A BUTTON
@@ -160,7 +162,6 @@ public class XInputControl : MonoBehaviour
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onReleased != null)
                 {
-                    print("released");
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     a.onReleased.Activate(_event.xInputdata.a);
                 }
@@ -171,7 +172,6 @@ public class XInputControl : MonoBehaviour
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onHeld != null)
                 {
-                    print("held");
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     a.onHeld.Activate(_event.xInputdata.a);
                 }
@@ -182,7 +182,6 @@ public class XInputControl : MonoBehaviour
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onPressed != null)
                 {
-                    print("pressed");
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     a.onPressed.Activate(_event.xInputdata.a);
                 }
@@ -193,12 +192,268 @@ public class XInputControl : MonoBehaviour
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onInactive != null)
                 {
-                    print("inactive");
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     a.onInactive.Activate(_event.xInputdata.a);
                 }
             }
             #endregion
+            #region B BUTTON
+            //RELEASED
+            if (_event.xInputdata.b.Status == InputStatus.RELEASED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (b.onReleased != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    b.onReleased.Activate(_event.xInputdata.b);
+                }
+            }
+            //HELD
+            if (_event.xInputdata.b.Status == InputStatus.HELD)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (b.onHeld != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    b.onHeld.Activate(_event.xInputdata.b);
+                }
+            }
+            //PRESSED
+            if (_event.xInputdata.b.Status == InputStatus.PRESSED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (b.onPressed != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    b.onPressed.Activate(_event.xInputdata.b);
+                }
+            }
+            //INACTIVE
+            if (_event.xInputdata.b.Status == InputStatus.INACTIVE)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (b.onInactive != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    b.onInactive.Activate(_event.xInputdata.b);
+                }
+            }
+            #endregion
+            #region Y BUTTON
+            //RELEASED
+            if (_event.xInputdata.y.Status == InputStatus.RELEASED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (y.onReleased != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    y.onReleased.Activate(_event.xInputdata.y);
+                }
+            }
+            //HELD
+            if (_event.xInputdata.y.Status == InputStatus.HELD)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (y.onHeld != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    y.onHeld.Activate(_event.xInputdata.y);
+                }
+            }
+            //PRESSED
+            if (_event.xInputdata.y.Status == InputStatus.PRESSED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (y.onPressed != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    y.onPressed.Activate(_event.xInputdata.y);
+                }
+            }
+            //INACTIVE
+            if (_event.xInputdata.y.Status == InputStatus.INACTIVE)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (y.onInactive != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    y.onInactive.Activate(_event.xInputdata.y);
+                }
+            }
+            #endregion
+            #region X BUTTON
+            //RELEASED
+            if (_event.xInputdata.x.Status == InputStatus.RELEASED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (x.onReleased != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    x.onReleased.Activate(_event.xInputdata.x);
+                }
+            }
+            //HELD
+            if (_event.xInputdata.x.Status == InputStatus.HELD)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (x.onHeld != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    x.onHeld.Activate(_event.xInputdata.x);
+                }
+            }
+            //PRESSED
+            if (_event.xInputdata.x.Status == InputStatus.PRESSED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (x.onPressed != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    x.onPressed.Activate(_event.xInputdata.x);
+                }
+            }
+            //INACTIVE
+            if (_event.xInputdata.x.Status == InputStatus.INACTIVE)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (x.onInactive != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    x.onInactive.Activate(_event.xInputdata.x);
+                }
+            }
+            #endregion
+
+            //analog sticks
+            #region LEFT ANALOG STICK
+            //RELEASED
+            if (_event.xInputdata.ls.Status == InputStatus.RELEASED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (leftStick.onReleased != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    leftStick.onReleased.Activate(_event.xInputdata.ls);
+                }
+            }
+            //HELD
+            if (_event.xInputdata.ls.Status == InputStatus.HELD)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (leftStick.onHeld != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    leftStick.onHeld.Activate(_event.xInputdata.ls);
+                }
+            }
+            //PRESSED
+            if (_event.xInputdata.ls.Status == InputStatus.PRESSED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (leftStick.onPressed != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    leftStick.onPressed.Activate(_event.xInputdata.ls);
+                }
+            }
+            //INACTIVE
+            if (_event.xInputdata.ls.Status == InputStatus.INACTIVE)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (leftStick.onInactive != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    leftStick.onInactive.Activate(_event.xInputdata.ls);
+                }
+            }
+            #endregion
+            #region RIGHT ANALOG STICK
+            //RELEASED
+            if (_event.xInputdata.rs.Status == InputStatus.RELEASED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (rightStick.onReleased != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    rightStick.onReleased.Activate(_event.xInputdata.rs);
+                }
+            }
+            //HELD
+            if (_event.xInputdata.rs.Status == InputStatus.HELD)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (rightStick.onHeld != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    rightStick.onHeld.Activate(_event.xInputdata.rs);
+                }
+            }
+            //PRESSED
+            if (_event.xInputdata.rs.Status == InputStatus.PRESSED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (rightStick.onPressed != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    rightStick.onPressed.Activate(_event.xInputdata.rs);
+                }
+            }
+            //INACTIVE
+            if (_event.xInputdata.rs.Status == InputStatus.INACTIVE)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (rightStick.onInactive != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    rightStick.onInactive.Activate(_event.xInputdata.rs);
+                }
+            }
+            #endregion
+
+            //dpads
+            #region DPAD UP
+            //RELEASED
+            if (_event.xInputdata.dp_up.Status == InputStatus.RELEASED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (up.onReleased != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    up.onReleased.Activate(_event.xInputdata.dp_up);
+                }
+            }
+            //HELD
+            if (_event.xInputdata.dp_up.Status == InputStatus.HELD)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (up.onHeld != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    up.onHeld.Activate(_event.xInputdata.dp_up);
+                }
+            }
+            //PRESSED
+            if (_event.xInputdata.dp_up.Status == InputStatus.PRESSED)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (up.onPressed != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    up.onPressed.Activate(_event.xInputdata.dp_up);
+                }
+            }
+            //INACTIVE
+            if (_event.xInputdata.dp_up.Status == InputStatus.INACTIVE)
+            {
+                //safety check to see if we have an InputAction associated with this button/state combo
+                if (up.onInactive != null)
+                {
+                    //fire off input action and pass data for this button/stick/etc. as a parameter
+                    up.onInactive.Activate(_event.xInputdata.dp_up);
+                }
+            }
+            #endregion
+            
         }
     }
     #endregion

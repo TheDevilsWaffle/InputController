@@ -56,7 +56,7 @@ public class XInput : MonoBehaviour
     int maxButtonsCombo = 10;
 
     bool enableXInput = false;
-    XInputData data;
+    public static XInputData data;
     GamePadState previous;
     GamePadState current;
 
@@ -169,7 +169,8 @@ public class XInput : MonoBehaviour
     void InitializeXInput(EVENT_INPUT_INITIALIZE_XINPUT _event)
     {
         //DEBUG
-        Debug.Log("InitializeXInput() for "+_event.players+" number of players");
+        //Debug.Log("InitializeXInput() for "+_event.players+" number of players");
+        
         enableXInput = true;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////

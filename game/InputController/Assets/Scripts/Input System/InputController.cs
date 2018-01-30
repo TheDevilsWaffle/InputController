@@ -150,7 +150,9 @@ public class InputController : MonoBehaviour
     {
         if(gamepadSupport)
         {
-            Debug.Log("InitializeSupportedInputs() xinput for "+ players +" number of players");
+            //DEBUG
+            //Debug.Log("InitializeSupportedInputs() xinput for "+ players +" number of players");
+            
             Events.instance.Raise(new EVENT_INPUT_INITIALIZE_XINPUT(players));
         }
     }
