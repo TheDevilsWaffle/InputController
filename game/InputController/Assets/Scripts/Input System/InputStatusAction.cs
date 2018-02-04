@@ -21,9 +21,5 @@ public class InputStatusAction
     [Tooltip("Drag-and-drop a script that inherits from the 'InputAction' class to activate upon being released")]
     [SerializeField]
     public InputAction onReleased;
-
-    [Tooltip("Drag-and-drop a script that inherits from the 'InputAction' class to activate when inactive")]
-    [SerializeField]
-    public InputAction onInactive;
     #endregion
 }

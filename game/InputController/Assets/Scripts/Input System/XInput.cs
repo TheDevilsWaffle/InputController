@@ -123,7 +123,7 @@ public class XInput : MonoBehaviour
     {
         if(enableXInput)
         {
-            for (int _player = 0; _player < InputController.players; ++_player)
+            for (int _player = 0; _player < InputSystem.players; ++_player)
             {
                 GamePadState _testState = GamePad.GetState((PlayerIndex)_player);
                 if (_testState.IsConnected)

@@ -1,6 +1,6 @@
 ﻿﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 //AUTHOR — Travis Moore
-//SCRIPT — InputController.cs
+//SCRIPT — InputSystem.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
@@ -15,6 +15,10 @@ public class EVENT_INPUT_INITIALIZE_XINPUT : GameEvent
     {
         players = _players;
     }
+}
+public class EVENT_INPUT_INITIALIZE_KEYBOARD : GameEvent
+{
+    public EVENT_INPUT_INITIALIZE_KEYBOARD() { }
 }
 public class EVENT_INPUT_DISABLE_ALL : GameEvent
 {
@@ -40,11 +44,21 @@ public class EVENT_INPUT_ENABLE_PLAYER : GameEvent
         playerNumber = _playerNumber;
     }
 }
+public class EVENT_INPUT_KEYBOARD_TO_GAMEPAD : GameEvent
+{
+    public int playerNumber;
+    public Dictionary<KeyCode, InputStatus> keys;
+    public EVENT_INPUT_KEYBOARD_TO_GAMEPAD(int _playerNumber, Dictionary<KeyCode, InputStatus> _keys)
+    {
+        playerNumber = _playerNumber;
+        keys = _keys;
+    }
+}
 #endregion
 
 [RequireComponent(typeof(XInput))]
 
-public class InputController : MonoBehaviour
+public class InputSystem : MonoBehaviour
 {
     #region FIELDS
     [Header("Enable/Disable")]
@@ -170,7 +184,7 @@ public class InputController : MonoBehaviour
         }
         if(keyboardSupport)
         {
-            //function needed here
+            Events.instance.Raise(new EVENT_INPUT_INITIALIZE_KEYBOARD());
         }
         if(mouseSupport)
         {

@@ -102,7 +102,7 @@ public class XInput_Gamepad : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void RemoveSubscriptions()
     {
-        Events.instance.RemoveListener<EVENT_INPUT_XINPUT_UPDATE>(UpdateInputActions);
+        Events.instance.RemoveListener<EVENT_INPUT_XINPUT_UPDATE>(UpdateInputActions);      
     }
     #endregion
     #region PRIVATE METHODS
@@ -151,16 +151,6 @@ public class XInput_Gamepad : MonoBehaviour
                     a.onPressed.Activate(_event.xInputdata.a);
                 }
             }
-            //INACTIVE
-            if(_event.xInputdata.a.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if(a.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    a.onInactive.Activate(_event.xInputdata.a);
-                }
-            }
             #endregion
             #region B BUTTON
             //RELEASED
@@ -191,16 +181,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     b.onPressed.Activate(_event.xInputdata.b);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.b.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (b.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    b.onInactive.Activate(_event.xInputdata.b);
                 }
             }
             #endregion
@@ -235,16 +215,6 @@ public class XInput_Gamepad : MonoBehaviour
                     y.onPressed.Activate(_event.xInputdata.y);
                 }
             }
-            //INACTIVE
-            if (_event.xInputdata.y.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (y.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    y.onInactive.Activate(_event.xInputdata.y);
-                }
-            }
             #endregion
             #region X BUTTON
             //RELEASED
@@ -275,16 +245,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     x.onPressed.Activate(_event.xInputdata.x);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.x.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (x.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    x.onInactive.Activate(_event.xInputdata.x);
                 }
             }
             #endregion
@@ -321,16 +281,6 @@ public class XInput_Gamepad : MonoBehaviour
                     leftBumper.onPressed.Activate(_event.xInputdata.lb);
                 }
             }
-            //INACTIVE
-            if(_event.xInputdata.lb.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if(leftBumper.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftBumper.onInactive.Activate(_event.xInputdata.lb);
-                }
-            }
             #endregion
             #region RIGHT BUMPER
             //RELEASED
@@ -361,16 +311,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     rightBumper.onPressed.Activate(_event.xInputdata.rb);
-                }
-            }
-            //INACTIVE
-            if(_event.xInputdata.rb.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if(rightBumper.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightBumper.onInactive.Activate(_event.xInputdata.rb);
                 }
             }
             #endregion
@@ -407,16 +347,6 @@ public class XInput_Gamepad : MonoBehaviour
                     leftTrigger.onPressed.Activate(_event.xInputdata.lt);
                 }
             }
-            //INACTIVE
-            if(_event.xInputdata.lt.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if(leftTrigger.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onInactive.Activate(_event.xInputdata.lt);
-                }
-            }
             #endregion
             #region RIGHT TRIGGER
             //RELEASED
@@ -447,16 +377,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     rightTrigger.onPressed.Activate(_event.xInputdata.rt);
-                }
-            }
-            //INACTIVE
-            if(_event.xInputdata.rt.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if(rightTrigger.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onInactive.Activate(_event.xInputdata.rt);
                 }
             }
             #endregion
@@ -493,16 +413,6 @@ public class XInput_Gamepad : MonoBehaviour
                     leftStick.onPressed.Activate(_event.xInputdata.ls);
                 }
             }
-            //INACTIVE
-            if (_event.xInputdata.ls.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (leftStick.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftStick.onInactive.Activate(_event.xInputdata.ls);
-                }
-            }
             #endregion
             #region RIGHT ANALOG STICK
             //RELEASED
@@ -533,16 +443,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     rightStick.onPressed.Activate(_event.xInputdata.rs);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.rs.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (rightStick.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightStick.onInactive.Activate(_event.xInputdata.rs);
                 }
             }
             #endregion
@@ -579,16 +479,6 @@ public class XInput_Gamepad : MonoBehaviour
                     up.onPressed.Activate(_event.xInputdata.dp_up);
                 }
             }
-            //INACTIVE
-            if (_event.xInputdata.dp_up.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (up.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    up.onInactive.Activate(_event.xInputdata.dp_up);
-                }
-            }
             #endregion
             #region DPAD RIGHT
             //RELEASED
@@ -619,16 +509,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     right.onPressed.Activate(_event.xInputdata.dp_right);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.dp_right.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (right.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    right.onInactive.Activate(_event.xInputdata.dp_right);
                 }
             }
             #endregion
@@ -663,16 +543,6 @@ public class XInput_Gamepad : MonoBehaviour
                     down.onPressed.Activate(_event.xInputdata.dp_down);
                 }
             }
-            //INACTIVE
-            if (_event.xInputdata.dp_down.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (down.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    down.onInactive.Activate(_event.xInputdata.dp_down);
-                }
-            }
             #endregion
             #region DPAD LEFT
             //RELEASED
@@ -703,16 +573,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     left.onPressed.Activate(_event.xInputdata.dp_left);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.dp_left.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (left.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    left.onInactive.Activate(_event.xInputdata.dp_left);
                 }
             }
             #endregion
@@ -749,16 +609,6 @@ public class XInput_Gamepad : MonoBehaviour
                     view.onPressed.Activate(_event.xInputdata.view);
                 }
             }
-            //INACTIVE
-            if (_event.xInputdata.view.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (view.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    view.onInactive.Activate(_event.xInputdata.view);
-                }
-            }
             #endregion
             #region MENU
             //RELEASED
@@ -789,16 +639,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     menu.onPressed.Activate(_event.xInputdata.menu);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.menu.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (menu.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    menu.onInactive.Activate(_event.xInputdata.menu);
                 }
             }
             #endregion
@@ -833,16 +673,6 @@ public class XInput_Gamepad : MonoBehaviour
                     l3.onPressed.Activate(_event.xInputdata.l3);
                 }
             }
-            //INACTIVE
-            if (_event.xInputdata.l3.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (l3.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    l3.onInactive.Activate(_event.xInputdata.l3);
-                }
-            }
             #endregion
             #region R3
             //RELEASED
@@ -873,16 +703,6 @@ public class XInput_Gamepad : MonoBehaviour
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
                     r3.onPressed.Activate(_event.xInputdata.r3);
-                }
-            }
-            //INACTIVE
-            if (_event.xInputdata.r3.Status == InputStatus.INACTIVE)
-            {
-                //safety check to see if we have an InputAction associated with this button/state combo
-                if (r3.onInactive != null)
-                {
-                    //fire off input action and pass data for this button/stick/etc. as a parameter
-                    r3.onInactive.Activate(_event.xInputdata.r3);
                 }
             }
             #endregion
