@@ -72,7 +72,6 @@ public class XInput : MonoBehaviour
     float axisLimit = 22.5f;
 
     #endregion
-
     #region INITIALIZATION
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -114,7 +113,6 @@ public class XInput : MonoBehaviour
         Events.instance.AddListener<EVENT_INPUT_INITIALIZE_XINPUT>(InitializeXInput);
     }
     #endregion
-
     #region UPDATE
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -154,11 +152,6 @@ public class XInput : MonoBehaviour
         }
     }
     #endregion
-
-    #region PUBLIC METHODS
-
-    #endregion
-
     #region PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summy>
@@ -935,7 +928,7 @@ public class XInput : MonoBehaviour
     void Broadcast(int _player, XInputData _data)
     {
         //DEBUG - Event broadcast
-        Debug.Log("TEST - Event Broadcast(PLAYER("+_player +"): a button = "+_data.a.Status);
+        //Debug.Log("TEST - Event Broadcast(PLAYER("+_player +"): a button = "+_data.a.Status);
 
        Events.instance.Raise(new EVENT_INPUT_XINPUT_UPDATE(_player, data));
     }

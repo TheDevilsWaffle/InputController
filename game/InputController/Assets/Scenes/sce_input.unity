@@ -362,95 +362,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   leftStick:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   l3:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   rightStick:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   r3:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   up:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   right:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   down:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   left:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   a:
     onPressed: {fileID: 74168382}
     onHeld: {fileID: 74168382}
     onReleased: {fileID: 74168382}
     onInactive: {fileID: 74168382}
   x:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   y:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   b:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   view:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   menu:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   leftBumper:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   rightBumper:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   leftTrigger:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
   rightTrigger:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-    onInactive: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
+    onInactive: {fileID: 74168382}
 --- !u!4 &737960978
 Transform:
   m_ObjectHideFlags: 0

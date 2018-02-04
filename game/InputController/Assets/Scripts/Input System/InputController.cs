@@ -3,22 +3,11 @@
 //SCRIPT — InputController.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#pragma warning disable 0169
-#pragma warning disable 0649
-#pragma warning disable 0108
-#pragma warning disable 0414
-
 using UnityEngine;
-//using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-#region ENUMS
-
-#endregion
-
 #region EVENTS
-//disable all input
 public class EVENT_INPUT_INITIALIZE_XINPUT : GameEvent
 {
     public int players;
@@ -31,12 +20,10 @@ public class EVENT_INPUT_DISABLE_ALL : GameEvent
 {
     public EVENT_INPUT_DISABLE_ALL() { }
 }
-//enable all input
 public class EVENT_INPUT_ENABLE_ALL : GameEvent
 {
     public EVENT_INPUT_ENABLE_ALL() { }
 }
-//disable specific player input
 public class EVENT_INPUT_DISABLE_PLAYER : GameEvent
 {
     public int playerNumber;
@@ -45,7 +32,6 @@ public class EVENT_INPUT_DISABLE_PLAYER : GameEvent
         playerNumber = _playerNumber;
     }
 }
-//enable specific player input
 public class EVENT_INPUT_ENABLE_PLAYER : GameEvent
 {
     public int playerNumber;
@@ -61,7 +47,6 @@ public class EVENT_INPUT_ENABLE_PLAYER : GameEvent
 public class InputController : MonoBehaviour
 {
     #region FIELDS
-
     [Header("Enable/Disable")]
     [SerializeField]
     bool enableInput = true;
@@ -76,26 +61,12 @@ public class InputController : MonoBehaviour
     bool keyboardSupport;
     [SerializeField]
     bool mouseSupport;
-
     #endregion
 
     #region INITIALIZATION
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// OnValidate
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    void OnValidate()
-    {
-        //refs
-
-
-        //initial values
-
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// Awake
+    /// initialize references/connections/functions in this script and other scripts
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
@@ -105,7 +76,7 @@ public class InputController : MonoBehaviour
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// Start
+    /// called on first frame when script is enabled before Update()
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Start()
@@ -116,9 +87,11 @@ public class InputController : MonoBehaviour
             InitializeSupportedInputs();
         }
     }
+    #endregion
+    #region SUBSCRIPTIONS
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// SetSubscriptions
+    /// listen to specific GameEvents
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void SetSubscriptions()
@@ -130,20 +103,60 @@ public class InputController : MonoBehaviour
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// OnDestroy
+    /// end listening to specific GameEvents
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    void OnDestroy()
+    void RemoveSubscriptions()
     {
-        //remove listeners
         Events.instance.RemoveListener<EVENT_INPUT_ENABLE_ALL>(EnableAllPlayers);        
         Events.instance.RemoveListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
         Events.instance.RemoveListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
         Events.instance.RemoveListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
     }
+    #endregion
+    #region PUBLIC METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// InitializeSupportedInputs
+    /// enable input for all players
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void EnableAllPlayers(EVENT_INPUT_ENABLE_ALL _event)
+    {
+        enableInput = true;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// disable input for all players
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisableAllPlayers(EVENT_INPUT_DISABLE_ALL _event)
+    {
+        enableInput = false;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// enable input for a specific player
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void EnablePlayerInput(EVENT_INPUT_ENABLE_PLAYER _event)
+    {
+        //function needed here
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// disable input for a specific player
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisablePlayerInput(EVENT_INPUT_DISABLE_PLAYER _event)
+    {
+        //function needed here
+    }
+
+    #endregion
+    #region PRIVATE METHODS
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// start input for enabled inputs
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void InitializeSupportedInputs()
@@ -155,112 +168,25 @@ public class InputController : MonoBehaviour
             
             Events.instance.Raise(new EVENT_INPUT_INITIALIZE_XINPUT(players));
         }
+        if(keyboardSupport)
+        {
+            //function needed here
+        }
+        if(mouseSupport)
+        {
+            //function needed here
+        }
     }
     #endregion
-
-    #region UPDATE
+    #region ON DESTORY
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// Update()
+    /// called when the gameobject with this script is destroyed
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    void Update()
+    void OnDestroy()
     {
-
-    #if false
-        UpdateTesting();
-    #endif
-    
-    }
-    #endregion
-
-    #region PUBLIC METHODS
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void EnableAllPlayers(EVENT_INPUT_ENABLE_ALL _event)
-    {
-        enableInput = true;
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisableAllPlayers(EVENT_INPUT_DISABLE_ALL _event)
-    {
-        enableInput = false;
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void EnablePlayerInput(EVENT_INPUT_ENABLE_PLAYER _event)
-    {
-        //players[_event.playerNumber].EnablePlayerInput();
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// function
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisablePlayerInput(EVENT_INPUT_DISABLE_PLAYER _event)
-    {
-        //players[_event.playerNumber].DisablePlayerInput();
-    }
-
-    #endregion
-
-    #region PRIVATE METHODS
-    
-    #endregion
-
-    #region TESTING
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// UpdateTesting
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    void UpdateTesting()
-    {
-        //Keypad 0
-        if(Input.GetKeyDown(KeyCode.Keypad0))
-        {
-
-        }
-        //Keypad 1
-        if(Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            
-        }
-        //Keypad 2
-        if(Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            
-        }
-        //Keypad 3
-        if(Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            
-        }
-        //Keypad 4
-        if(Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            
-        }
-        //Keypad 5
-        if(Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            
-        }
-        //Keypad 6
-        if(Input.GetKeyDown(KeyCode.Keypad6))
-        {
-            
-        }
+        RemoveSubscriptions();
     }
     #endregion
 }

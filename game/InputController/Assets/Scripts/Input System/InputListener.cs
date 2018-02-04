@@ -69,7 +69,7 @@ public class InputListener : InputAction
 
     public override void Activate(InputData _data)
     {
-        print("InputListener.cs - _data input status = " + _data.Status);
+        print("InputListener.cs: input type = " + _data.ID + ", status = " + _data.Status);
         if(_data.Status == InputStatus.RELEASED)
         {
             text.text = "RELEASED";
