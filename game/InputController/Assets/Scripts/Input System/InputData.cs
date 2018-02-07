@@ -60,6 +60,13 @@ public class InputData
         get { return id; }
         private set { id = value; }
     }
+    //keycode
+    KeyCode key;
+    public KeyCode Key
+    {
+        get { return key; }
+        private set {key = value; }
+    }
     //icon
     Sprite icon_xbox;
     public Sprite IconXBox
@@ -123,6 +130,11 @@ public class InputData
     public void SetName(string _name)
     {
         id = _name;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    public void SetKey(KeyCode _key)
+    {
+        Key = _key;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void SetIcon_XBox(Sprite _sprite)

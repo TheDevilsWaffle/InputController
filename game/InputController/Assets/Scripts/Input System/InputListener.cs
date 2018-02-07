@@ -69,22 +69,23 @@ public class InputListener : InputAction
 
     public override void Activate(InputData _data)
     {
-        print("InputListener.cs: input type = " + _data.ID + ", status = " + _data.Status);
+        //DEBUG
+        Debug.Log("InputListener.cs: input type = " + _data.ID + ", status = " + _data.Status);
         if(_data.Status == InputStatus.RELEASED)
         {
-            text.text = "RELEASED";
+            //text.text = "RELEASED";
         }
         else if(_data.Status == InputStatus.HELD)
         {
-            text.text = "HELD";
+            //text.text = "HELD";
         }
         else if(_data.Status == InputStatus.PRESSED)
         {
-            text.text = "PRESSED";
+            //text.text = "PRESSED";
         }
         else if(_data.Status == InputStatus.INACTIVE)
         {
-            text.text = "INACTIVE";
+            //text.text = "INACTIVE";
         }
     }
 

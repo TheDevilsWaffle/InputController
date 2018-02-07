@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -461,9 +461,9 @@ MonoBehaviour:
   player: 1
   up: 119
   upAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
+    onPressed: {fileID: 74168382}
+    onHeld: {fileID: 74168382}
+    onReleased: {fileID: 74168382}
   right: 100
   rightAction:
     onPressed: {fileID: 0}
@@ -480,21 +480,85 @@ MonoBehaviour:
     onHeld: {fileID: 0}
     onReleased: {fileID: 0}
   DPadUp: 273
+  DPadUpAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   DPadRight: 275
+  DPadRightAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   DPadDown: 274
+  DPadDownAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   DPadLeft: 276
+  DPadLeftAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   y: 306
+  yAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   b: 113
+  bAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   a: 32
+  aAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   x: 101
+  xAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   select: 9
+  selectAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   start: 13
+  startAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   l3: 111
+  l3Action:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   r3: 112
-  l1: 308
-  l2: 304
-  r1: 307
-  r2: 303
+  r3Action:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  lb: 308
+  lbAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  rb: 304
+  rbAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  lt: 307
+  ltAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  rt: 303
+  rtAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
 --- !u!1 &788116764
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,8 +589,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableInput: 1
   numberOfPlayers: 1
-  gamepadSupport: 1
-  keyboardSupport: 0
+  gamepadSupport: 0
+  keyboardSupport: 1
   mouseSupport: 0
 --- !u!4 &788116766
 Transform:

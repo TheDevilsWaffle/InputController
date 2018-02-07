@@ -17,7 +17,7 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     [SerializeField]
     int player = 1;
     [Space]
-    [Header("Analog Sticks")]
+    [Header("Left Analog Stick")]
     public KeyCode up = KeyCode.W;
     [SerializeField]
     InputStatusAction upAction;
@@ -33,6 +33,23 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     public KeyCode left = KeyCode.A;
     [SerializeField]
     InputStatusAction leftAction;
+
+    [Header("Right Analog Stick")]
+    public KeyCode upAlt = KeyCode.I;
+    [SerializeField]
+    InputStatusAction upAltAction;
+    [Space]
+    public KeyCode rightAlt = KeyCode.L;
+    [SerializeField]
+    InputStatusAction rightAltAction;
+    [Space]
+    public KeyCode downAlt = KeyCode.K;
+    [SerializeField]
+    InputStatusAction downAltAction;
+    [Space]
+    public KeyCode leftAlt = KeyCode.J;
+    [SerializeField]
+    InputStatusAction leftAltAction;
 
     [Header("DPad")]
     public KeyCode DPadUp = KeyCode.UpArrow;
@@ -71,13 +88,13 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     [Space]
 
     [Header("Misc Buttons")]
-    public KeyCode select = KeyCode.Tab;
+    public KeyCode view = KeyCode.Tab;
     [SerializeField]
-    InputStatusAction selectAction;
+    InputStatusAction viewAction;
     [Space]
-    public KeyCode start = KeyCode.Return;
+    public KeyCode menu = KeyCode.Return;
     [SerializeField]
-    InputStatusAction startAction;
+    InputStatusAction menuAction;
     [Space]
     public KeyCode l3 = KeyCode.O;
     [SerializeField]
@@ -109,11 +126,9 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     [Space]
 
     bool enableKeyboard = false;
-    Dictionary<KeyCode, InputStatus> keys;
-    List<KeyCode> keysList;
+    List<InputData> keys;
     List<InputStatusAction> inputStatusActions;
     #endregion
-
     #region INITIALIZATION
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -123,7 +138,7 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     void Awake()
     {
         //create keys dictionary and list (list needed to traverse dictionary and update dictionary value(cannot update value by reference))
-        keys = new Dictionary<KeyCode, InputStatus>();
+        keys = new List<InputData>();
         inputStatusActions = new List<InputStatusAction>();
 
         //check for assigned keys and store them in keys
@@ -160,7 +175,6 @@ public class KeyboardControls_Gamepad : MonoBehaviour
         Events.instance.RemoveListener<EVENT_INPUT_INITIALIZE_KEYBOARD>(EnableKeyboardInput);
     }
     #endregion
-
     #region UPDATE
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -183,7 +197,6 @@ public class KeyboardControls_Gamepad : MonoBehaviour
         }
     }
     #endregion
-
     #region PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -226,7 +239,7 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// 
+    /// disable all keyboard input
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void DisableKeyboardInput(EVENT_INPUT_DISABLE_PLAYER _event)
@@ -238,167 +251,378 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// Adds only the assigned buttons to the keys list
+    /// Adds only the assigned buttons from Unity Inspector to keys
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void AddAssignedKeys()
    {
-        //checking analog stick keys
+        #region LEFT ANALOG STICK
         if (up != KeyCode.None)
         {
-           keys.Add(up, InputStatus.INACTIVE);
-           inputStatusActions.Add(upAction);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("up");
+            _inputData.SetKey(up);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(upAction);
         }
         if (right != KeyCode.None)
         {
-           keys.Add(right, InputStatus.INACTIVE);
-           inputStatusActions.Add(rightAction);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("right");
+            _inputData.SetKey(right);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(rightAction);
         }
         if (down != KeyCode.None)
         {
-           keys.Add(down, InputStatus.INACTIVE);
-           inputStatusActions.Add(downAction);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("down");
+            _inputData.SetKey(down);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(downAction);
         }
         if (left != KeyCode.None)
         {
-           keys.Add(left, InputStatus.INACTIVE);
-           inputStatusActions.Add(leftAction);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("left");
+            _inputData.SetKey(left);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(leftAction);
         }
-
-        //add dpad keys
-        if  (DPadUp != KeyCode.None)
+        #endregion
+        #region RIGHT ANALOG STICK
+        if (upAlt != KeyCode.None)
         {
-            keys.Add(DPadUp, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("upAlt");
+            _inputData.SetKey(upAlt);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(upAltAction);
+        }
+        if (rightAlt != KeyCode.None)
+        {
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("rightAlt");
+            _inputData.SetKey(rightAlt);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(rightAltAction);
+        }
+        if (downAlt != KeyCode.None)
+        {
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("downAlt");
+            _inputData.SetKey(downAlt);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(downAltAction);
+        }
+        if (leftAlt != KeyCode.None)
+        {
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("leftAlt");
+            _inputData.SetKey(leftAlt);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(leftAction);
+        }
+        #endregion
+        #region DPAD
+        if (DPadUp != KeyCode.None)
+        {
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("dpad_up");
+            _inputData.SetKey(DPadUp);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(DPadUpAction);
         }
         if (DPadRight != KeyCode.None)
         {
-            keys.Add(DPadRight, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("dpad_right");
+            _inputData.SetKey(DPadRight);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(DPadRightAction);
         }
         if (DPadDown != KeyCode.None)
         {
-            keys.Add(DPadDown, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("dpad_down");
+            _inputData.SetKey(DPadDown);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(DPadDownAction);
         }
         if (DPadLeft != KeyCode.None)
         {
-            keys.Add(DPadLeft, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("dpad_left");
+            _inputData.SetKey(DPadLeft);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(DPadLeftAction);
         }
-
-        //checking button/keys
+        #endregion
+        #region BUTTONS
         if (y != KeyCode.None)
         {
-            keys.Add(y, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("y");
+            _inputData.SetKey(y);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(yAction);
         }
         if (b != KeyCode.None)
         {
-            keys.Add(b, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("b");
+            _inputData.SetKey(b);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(bAction);
         }
         if (a != KeyCode.None)
         {
-            keys.Add(a, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("a");
+            _inputData.SetKey(a);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(aAction);
         }
         if (x != KeyCode.None)
         {
-            keys.Add(x, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("x");
+            _inputData.SetKey(x);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(xAction);
         }
-
-        //checking shoulder button/keys
+        #endregion
+        #region BUMPERS
         if (lb != KeyCode.None)
         {
-            keys.Add(lb, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("lb");
+            _inputData.SetKey(lb);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(lbAction);
         }
         if (rb != KeyCode.None)
         {
-            keys.Add(rb, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("rb");
+            _inputData.SetKey(rb);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(rbAction);
         }
+        #endregion
+        #region TRIGGERS
         if (lt != KeyCode.None)
         {
-            keys.Add(lt, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("lt");
+            _inputData.SetKey(lt);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(ltAction);
         }
         if (rt != KeyCode.None)
         {
-            keys.Add(rt, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("rt");
+            _inputData.SetKey(rt);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(rtAction);
         }
-
-        //checking analog button/keys
+        #endregion
+        #region MISC. BUTTONS
         if (l3 != KeyCode.None)
         {
-            keys.Add(l3, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("l3");
+            _inputData.SetKey(l3);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(l3Action);
         }
         if (r3 != KeyCode.None)
         {
-            keys.Add(r3, InputStatus.INACTIVE);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("r3");
+            _inputData.SetKey(r3);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
             inputStatusActions.Add(r3Action);
         }
-
-        //checking misc button/keys
-        if (select != KeyCode.None)
+        if (view != KeyCode.None)
         {
-            keys.Add(select, InputStatus.INACTIVE);
-            inputStatusActions.Add(selectAction);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("view");
+            _inputData.SetKey(view);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(viewAction);
         }
-        if (start != KeyCode.None)
+        if (menu != KeyCode.None)
         {
-            keys.Add(start, InputStatus.INACTIVE);
-            inputStatusActions.Add(startAction);
+            //set input data
+            InputData _inputData = new InputData();
+            _inputData.SetName("menu");
+            _inputData.SetKey(menu);
+            _inputData.SetStatus(InputStatus.INACTIVE);
+            keys.Add(_inputData);
+            //add actions
+            inputStatusActions.Add(menuAction);
         }
-
-        //add only the keys needed to the list
-        keysList = new List<KeyCode>(keys.Keys);
+        #endregion
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    /// cycles through keys and updates their status
+    /// cycles through each key in keys and updates their InputData
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     void UpdateKeyboardInput()
     {
-        foreach (KeyCode key in keysList)
+        //loop through each InputData in keys
+        for(int _index = 0; _index < keys.Count; ++_index)
         {
-            //released
-            if (Input.GetKeyUp(key) && keys[key] == InputStatus.HELD)
+            #region RELEASED
+            if (Input.GetKeyUp(keys[_index].Key))
             {
-                keys[key] = InputStatus.RELEASED;
-                
+                //update data
+                keys[_index].SetStatus(InputStatus.RELEASED);
+                keys[_index].SetXYRawValue(Vector2.zero);
+                keys[_index].AddXYValue(Vector2.zero);
+                keys[_index].SetHeldDuration(0f);
+                keys[_index].SetInactiveDuration(Time.deltaTime);
+
+                //perform input action if there is one assigned
+                if(inputStatusActions[_index].onReleased != null)
+                {
+                    inputStatusActions[_index].onReleased.Activate(keys[_index]);
+                }
+
                 //DEBUG — check which key is released and print its status
-                //print("key released: " + key + " status = " + keys[key]);
+                //Debug.Log("key released: " + keys[_index].Key + " status = " + keys[_index].Status);
             }
-            //held
-            else if (Input.GetKey(key) && keys[key] == InputStatus.PRESSED || keys[key] == InputStatus.HELD)
+            #endregion
+            #region HELD
+            if (Input.GetKey(keys[_index].Key))
             {
-                keys[key] = InputStatus.HELD;
+                //update data
+                keys[_index].SetStatus(InputStatus.HELD);
+                keys[_index].SetXYRawValue(Vector2.one);
+                keys[_index].AddXYValue(Vector2.one);
+                keys[_index].SetHeldDuration(Time.deltaTime);
+                keys[_index].SetInactiveDuration(0);
+
+                //perform input action if there is one assigned
+                if (inputStatusActions[_index].onHeld != null)
+                {
+                    inputStatusActions[_index].onHeld.Activate(keys[_index]);
+                }
 
                 //DEBUG — check which key is held and print its status
-                //print("key held: " + key + " status = " + keys[key]);
+                //Debug.Log("key held: " + keys[_index].Key + " status = " + keys[_index].Status);
             }
-            //pressed
-            else if (Input.GetKeyDown(key) && keys[key] == InputStatus.INACTIVE)
+            #endregion
+            #region PRESSED
+            if (Input.GetKeyDown(keys[_index].Key))
             {
-                keys[key] = InputStatus.PRESSED;
+                //update data
+                keys[_index].SetStatus(InputStatus.RELEASED);
+                keys[_index].SetXYRawValue(Vector2.one);
+                keys[_index].AddXYValue(Vector2.one);
+                keys[_index].SetHeldDuration(Time.deltaTime);
+                keys[_index].SetInactiveDuration(0f);
+
+                //perform input action if there is one assigned
+                if (inputStatusActions[_index].onPressed != null)
+                {
+                    inputStatusActions[_index].onPressed.Activate(keys[_index]);
+                }
 
                 //DEBUG — check which key is pressed and print its status
-                //print("key pressed: " + key + " status = " + keys[key]);
+                //Debug.Log("key pressed: " + keys[_index].Key + " status = " + keys[_index].Status);
             }
+            #endregion
+            #region INACTIVE
             //inactive
             else
             {
-                keys[key] = InputStatus.INACTIVE;
+                //update data
+                keys[_index].SetStatus(InputStatus.INACTIVE);
+                keys[_index].SetXYRawValue(Vector2.zero);
+                keys[_index].AddXYValue(Vector2.zero);
+                keys[_index].SetHeldDuration(0f);
+                keys[_index].SetInactiveDuration(Time.deltaTime);
+
+                //perform input action if there is one assigned
+                keys[_index].SetStatus(InputStatus.INACTIVE);
 
                 //DEBUG — check which key is inactive and print its status
-                //print("key inactive: " + key + " status = " + keys[key]);
+                //Debug.Log("key inactive: " + keys[_index].Key + " status = " + keys[_index].Status);
             }
+            #endregion
         }
     }
     #endregion

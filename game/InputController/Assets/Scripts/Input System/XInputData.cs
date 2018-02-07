@@ -53,7 +53,6 @@ public class XInputData
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public XInputData()
     {
-        //create new InputDatas
         comboTracker = new Queue<InputData>();
 
         ls = new InputData();
