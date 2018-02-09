@@ -8,15 +8,21 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+#region EVENTS
+public class EVENT_INPUT_KEYBOARD_KEY_BROADCAST : GameEvent
+{
+    public InputData keyInputData;
+    public EVENT_INPUT_KEYBOARD_KEY_BROADCAST(InputData _keyInputData)
+    {
+        keyInputData = _keyInputData;
+    }
+}
+#endregion
+
 public class KeyboardControls_Gamepad : MonoBehaviour
 {
     #region FIELDS
     [Header("Keyboard Mapped Like A Gamepad")]
-    [Header("Player Number")]
-    [Range(1, 4)]
-    [SerializeField]
-    int player = 1;
-    [Space]
     [Header("Left Analog Stick")]
     public KeyCode up = KeyCode.W;
     [SerializeField]
@@ -156,9 +162,7 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     void SetSubscriptions()
     {
         Events.instance.AddListener<EVENT_INPUT_DISABLE_ALL>(DisableKeyboardInput);
-        Events.instance.AddListener<EVENT_INPUT_DISABLE_PLAYER>(DisableKeyboardInput);
         Events.instance.AddListener<EVENT_INPUT_ENABLE_ALL>(EnableKeyboardInput);
-        Events.instance.AddListener<EVENT_INPUT_ENABLE_PLAYER>(EnableKeyboardInput);
         Events.instance.AddListener<EVENT_INPUT_INITIALIZE_KEYBOARD>(EnableKeyboardInput);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,9 +173,7 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     void RemoveSubscriptions()
     {
         Events.instance.RemoveListener<EVENT_INPUT_DISABLE_ALL>(DisableKeyboardInput);
-        Events.instance.RemoveListener<EVENT_INPUT_DISABLE_PLAYER>(DisableKeyboardInput);
         Events.instance.RemoveListener<EVENT_INPUT_ENABLE_ALL>(EnableKeyboardInput);
-        Events.instance.RemoveListener<EVENT_INPUT_ENABLE_PLAYER>(EnableKeyboardInput);
         Events.instance.RemoveListener<EVENT_INPUT_INITIALIZE_KEYBOARD>(EnableKeyboardInput);
     }
     #endregion
@@ -221,33 +223,9 @@ public class KeyboardControls_Gamepad : MonoBehaviour
     /// 
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    void EnableKeyboardInput(EVENT_INPUT_ENABLE_PLAYER _event)
-    {
-        if(player == _event.playerNumber)
-        {
-            enableKeyboard = true;
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// 
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
     void DisableKeyboardInput(EVENT_INPUT_DISABLE_ALL _event)
     {
         enableKeyboard = false;
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    /// <summary>
-    /// disable all keyboard input
-    /// </summary>
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    void DisableKeyboardInput(EVENT_INPUT_DISABLE_PLAYER _event)
-    {
-        if(player == _event.playerNumber)
-        {
-            enableKeyboard = false;
-        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -561,6 +539,9 @@ public class KeyboardControls_Gamepad : MonoBehaviour
                     inputStatusActions[_index].onReleased.Activate(keys[_index]);
                 }
 
+                //broadcast a message
+                Events.instance.Raise(new EVENT_INPUT_KEYBOARD_KEY_BROADCAST(keys[_index]));
+
                 //DEBUG — check which key is released and print its status
                 //Debug.Log("key released: " + keys[_index].Key + " status = " + keys[_index].Status);
             }
@@ -580,6 +561,9 @@ public class KeyboardControls_Gamepad : MonoBehaviour
                 {
                     inputStatusActions[_index].onHeld.Activate(keys[_index]);
                 }
+
+                //broadcast a message
+                Events.instance.Raise(new EVENT_INPUT_KEYBOARD_KEY_BROADCAST(keys[_index]));
 
                 //DEBUG — check which key is held and print its status
                 //Debug.Log("key held: " + keys[_index].Key + " status = " + keys[_index].Status);
@@ -601,6 +585,9 @@ public class KeyboardControls_Gamepad : MonoBehaviour
                     inputStatusActions[_index].onPressed.Activate(keys[_index]);
                 }
 
+                //broadcast a message
+                Events.instance.Raise(new EVENT_INPUT_KEYBOARD_KEY_BROADCAST(keys[_index]));
+
                 //DEBUG — check which key is pressed and print its status
                 //Debug.Log("key pressed: " + keys[_index].Key + " status = " + keys[_index].Status);
             }
@@ -615,9 +602,6 @@ public class KeyboardControls_Gamepad : MonoBehaviour
                 keys[_index].AddXYValue(Vector2.zero);
                 keys[_index].SetHeldDuration(0f);
                 keys[_index].SetInactiveDuration(Time.deltaTime);
-
-                //perform input action if there is one assigned
-                keys[_index].SetStatus(InputStatus.INACTIVE);
 
                 //DEBUG — check which key is inactive and print its status
                 //Debug.Log("key inactive: " + keys[_index].Key + " status = " + keys[_index].Status);

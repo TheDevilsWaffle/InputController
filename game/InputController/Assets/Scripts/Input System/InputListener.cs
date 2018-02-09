@@ -71,6 +71,7 @@ public class InputListener : InputAction
     {
         //DEBUG
         Debug.Log("InputListener.cs: input type = " + _data.ID + ", status = " + _data.Status);
+        
         if(_data.Status == InputStatus.RELEASED)
         {
             //text.text = "RELEASED";

@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 737960978}
   - component: {fileID: 737960977}
   - component: {fileID: 737960979}
+  - component: {fileID: 737960980}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -479,6 +480,26 @@ MonoBehaviour:
     onPressed: {fileID: 0}
     onHeld: {fileID: 0}
     onReleased: {fileID: 0}
+  upAlt: 105
+  upAltAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  rightAlt: 108
+  rightAltAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  downAlt: 107
+  downAltAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  leftAlt: 106
+  leftAltAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
   DPadUp: 273
   DPadUpAction:
     onPressed: {fileID: 0}
@@ -519,13 +540,13 @@ MonoBehaviour:
     onPressed: {fileID: 0}
     onHeld: {fileID: 0}
     onReleased: {fileID: 0}
-  select: 9
-  selectAction:
+  view: 9
+  viewAction:
     onPressed: {fileID: 0}
     onHeld: {fileID: 0}
     onReleased: {fileID: 0}
-  start: 13
-  startAction:
+  menu: 13
+  menuAction:
     onPressed: {fileID: 0}
     onHeld: {fileID: 0}
     onReleased: {fileID: 0}
@@ -558,6 +579,23 @@ MonoBehaviour:
   rtAction:
     onPressed: {fileID: 0}
     onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+--- !u!114 &737960980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737960976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56983570b6cb7bd408d3de8fccf9f11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
+  key: 8
+  keyInputStatusAction:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 74168382}
     onReleased: {fileID: 0}
 --- !u!1 &788116764
 GameObject:
