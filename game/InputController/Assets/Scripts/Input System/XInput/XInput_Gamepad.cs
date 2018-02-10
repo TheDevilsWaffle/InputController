@@ -10,10 +10,10 @@ using System.Collections;
 public class XInput_Gamepad : MonoBehaviour
 {
     #region FIELDS
-    [Header("Player")]
     [Range(1,4)]
     [SerializeField]
     int player = 1;
+    [Space]
 
     [Header("Analog Sticks")]
     [SerializeField]
@@ -24,6 +24,7 @@ public class XInput_Gamepad : MonoBehaviour
     InputStatusAction rightStick;
     [SerializeField]
     InputStatusAction r3;
+    [Space]
 
     [Header("D-Pad")]
     [SerializeField]
@@ -34,7 +35,7 @@ public class XInput_Gamepad : MonoBehaviour
     InputStatusAction down;
     [SerializeField]
     InputStatusAction left;
-
+    [Space]
     [Header("Buttons")]
     [SerializeField]
     InputStatusAction a;
@@ -44,18 +45,21 @@ public class XInput_Gamepad : MonoBehaviour
     InputStatusAction y;
     [SerializeField]
     InputStatusAction b;
+    [Space]
 
     [Header("Misc. Buttons")]
     [SerializeField]
     InputStatusAction view;
     [SerializeField]
     InputStatusAction menu;
+    [Space]
 
     [Header("Bumpers")]
     [SerializeField]
     InputStatusAction leftBumper;
     [SerializeField]
     InputStatusAction rightBumper;
+    [Space]
 
     [Header("Triggers")]
     [SerializeField]

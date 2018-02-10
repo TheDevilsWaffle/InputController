@@ -341,8 +341,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 737960978}
-  - component: {fileID: 737960977}
-  - component: {fileID: 737960979}
   - component: {fileID: 737960980}
   m_Layer: 0
   m_Name: Player 1
@@ -351,90 +349,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &737960977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 737960976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab3f5b1efdb6b142866caf5de9af4f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: 1
-  leftStick:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  l3:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  rightStick:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  r3:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  up:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  right:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  down:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  left:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  a:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  x:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  y:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  b:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  view:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  menu:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  leftBumper:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  rightBumper:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  leftTrigger:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  rightTrigger:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
 --- !u!4 &737960978
 Transform:
   m_ObjectHideFlags: 0
@@ -448,138 +362,6 @@ Transform:
   m_Father: {fileID: 788116766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &737960979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 737960976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00fb2ef3d563cec48ab545a6523a94de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: 1
-  up: 119
-  upAction:
-    onPressed: {fileID: 74168382}
-    onHeld: {fileID: 74168382}
-    onReleased: {fileID: 74168382}
-  right: 100
-  rightAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  down: 115
-  downAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  left: 97
-  leftAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  upAlt: 105
-  upAltAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  rightAlt: 108
-  rightAltAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  downAlt: 107
-  downAltAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  leftAlt: 106
-  leftAltAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  DPadUp: 273
-  DPadUpAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  DPadRight: 275
-  DPadRightAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  DPadDown: 274
-  DPadDownAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  DPadLeft: 276
-  DPadLeftAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  y: 306
-  yAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  b: 113
-  bAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  a: 32
-  aAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  x: 101
-  xAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  view: 9
-  viewAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  menu: 13
-  menuAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  l3: 111
-  l3Action:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  r3: 112
-  r3Action:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  lb: 308
-  lbAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  rb: 304
-  rbAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  lt: 307
-  ltAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
-  rt: 303
-  rtAction:
-    onPressed: {fileID: 0}
-    onHeld: {fileID: 0}
-    onReleased: {fileID: 0}
 --- !u!114 &737960980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56983570b6cb7bd408d3de8fccf9f11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 1
   key: 8
   keyInputStatusAction:
     onPressed: {fileID: 0}
@@ -627,9 +408,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableInput: 1
   numberOfPlayers: 1
-  gamepadSupport: 0
-  keyboardSupport: 1
+  gamepadSupport: 1
+  keyboardSupport: 0
   mouseSupport: 0
+  analogSticksDeadZone: 0.2
+  triggersDeadZone: 0.2
+  maxButtonsCombo: 3
 --- !u!4 &788116766
 Transform:
   m_ObjectHideFlags: 0
@@ -655,11 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbf7c80f446a18488e2f9b173b5f4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  analogStickDeadZone: 0.2
-  triggerDeadZone: 0.2
-  maxHeldDuration: 3
-  maxInactiveDuration: 3
-  maxButtonsCombo: 10
 --- !u!1 &1557411895
 GameObject:
   m_ObjectHideFlags: 0

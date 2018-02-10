@@ -54,6 +54,32 @@ public class EVENT_INPUT_KEYBOARD_TO_GAMEPAD : GameEvent
         keys = _keys;
     }
 }
+public class EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_LOST : GameEvent
+{
+    public int playerNumber;
+    public EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_LOST(int _playerNumber)
+    {
+        playerNumber = _playerNumber;
+    }
+}
+public class EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_ACQUIRED : GameEvent
+{
+    public int playerNumber;
+    public EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_ACQUIRED(int _playerNumber)
+    {
+        playerNumber = _playerNumber;
+    }
+}
+public class EVENT_INPUT_XINPUT_UPDATE : GameEvent
+{
+    public int player;
+    public XInputData xInputdata;
+    public EVENT_INPUT_XINPUT_UPDATE(int _playerNumber, XInputData _xInputData)
+    {
+        player = _playerNumber;
+        xInputdata = _xInputData;
+    }
+}
 #endregion
 
 [RequireComponent(typeof(XInput))]
@@ -64,17 +90,41 @@ public class InputSystem : MonoBehaviour
     [Header("Enable/Disable")]
     [SerializeField]
     bool enableInput = true;
+    [Space]
+
     [Header("Players")]
     [SerializeField]
     [Range(1,4)]
     int numberOfPlayers;
     public static int players = 1;
+    [Space]
+
+    [Header("Inputs Supported")]
     [SerializeField]
     bool gamepadSupport;
     [SerializeField]
     bool keyboardSupport;
+    public static Queue<InputData> keyboardComboTracker;
     [SerializeField]
     bool mouseSupport;
+    [Space]
+
+    [Header("Dead Zone Thresholds")]
+    [Range(0, 1)]
+    [SerializeField]
+    float analogSticksDeadZone = 0.2f;
+    public static float analogStickDeadZone;
+    [Range(0, 1)]
+    [SerializeField]
+    float triggersDeadZone = 0.2f;
+    public static float triggerDeadZone;
+    [Space]
+
+    [Header("Maximum Buttons Remembered")]
+    [SerializeField]
+    [Range(2, 20)]
+    int maxButtonsCombo = 3;
+    public static int maxButtonsRemembered;
     #endregion
 
     #region INITIALIZATION
@@ -85,7 +135,12 @@ public class InputSystem : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
+        //set references/values/initialize data structures
+        keyboardComboTracker = new Queue<InputData>();
         players = numberOfPlayers;
+        analogStickDeadZone = analogSticksDeadZone;
+        triggerDeadZone = triggersDeadZone;
+        maxButtonsRemembered = maxButtonsCombo;
         SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +169,7 @@ public class InputSystem : MonoBehaviour
         Events.instance.AddListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
         Events.instance.AddListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
         Events.instance.AddListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
+        Events.instance.AddListener<EVENT_INPUT_KEYBOARD_KEY_BROADCAST>(UpdateKeyboardCombo);
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
@@ -126,6 +182,7 @@ public class InputSystem : MonoBehaviour
         Events.instance.RemoveListener<EVENT_INPUT_DISABLE_ALL>(DisableAllPlayers);
         Events.instance.RemoveListener<EVENT_INPUT_ENABLE_PLAYER>(EnablePlayerInput);
         Events.instance.RemoveListener<EVENT_INPUT_DISABLE_PLAYER>(DisablePlayerInput);
+        Events.instance.RemoveListener<EVENT_INPUT_KEYBOARD_KEY_BROADCAST>(UpdateKeyboardCombo);
     }
     #endregion
     #region PUBLIC METHODS
@@ -189,6 +246,23 @@ public class InputSystem : MonoBehaviour
         if(mouseSupport)
         {
             //function needed here
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// tracks the last 'x-number' of buttons pressed from the keyboard
+    /// <param name = "_event" >InputData of the key that was pressed</param>
+    /// </summary>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    void UpdateKeyboardCombo(EVENT_INPUT_KEYBOARD_KEY_BROADCAST _event)
+    {
+        //add in the latest button pressed
+        keyboardComboTracker.Enqueue(_event.keyInputData);
+
+        //dequeue the oldest button if we're at max rememberence
+        if (keyboardComboTracker.Count > maxButtonsRemembered)
+        {
+            keyboardComboTracker.Dequeue();
         }
     }
     #endregion

@@ -7,59 +7,18 @@ using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 
-#region EVENTS
-public class EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_LOST : GameEvent
-{
-    public int playerNumber;
-    public EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_LOST(int _playerNumber)
-    {
-        playerNumber = _playerNumber;
-    }
-}
-public class EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_ACQUIRED : GameEvent
-{
-    public int playerNumber;
-    public EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_ACQUIRED(int _playerNumber)
-    {
-        playerNumber = _playerNumber;
-    }
-}
-public class EVENT_INPUT_XINPUT_UPDATE : GameEvent
-{
-    public int player;
-    public XInputData xInputdata;
-    public EVENT_INPUT_XINPUT_UPDATE(int _playerNumber, XInputData _xInputData)
-    {
-        player = _playerNumber;
-        xInputdata = _xInputData;
-    }
-}
-#endregion
-
 public class XInput : MonoBehaviour
 {
     #region FIELDS
-    [Header("DEAD ZONES")]
-    [Range(0, 1)]
-    [SerializeField]
-    float analogStickDeadZone = 0.2f;
-    [Range(0, 1)]
-    [SerializeField]
-    float triggerDeadZone = 0.2f;
-
-    [Header("SETTINGS")]
-    [SerializeField]
-    float maxHeldDuration = 3f;
-    [SerializeField]
-    float maxInactiveDuration = 3f;
-    [SerializeField]
-    int maxButtonsCombo = 10;
-
-    bool enableXInput = false;
     public static XInputData data;
     GamePadState previous;
     GamePadState current;
 
+    float analogStickDeadZone;
+    float triggerDeadZone;
+    int maxButtonsCombo;
+    bool enableXInput = false;
+    
     //arcade axis values
     float up = -90f;
     float up_right = -45f;
@@ -100,6 +59,11 @@ public class XInput : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////////////////////////
     void Awake()
     {
+        //get reference values
+        analogStickDeadZone = InputSystem.analogStickDeadZone;
+        triggerDeadZone = InputSystem.triggerDeadZone;
+        maxButtonsCombo = InputSystem.maxButtonsRemembered;
+
         //set subscriptions to specifc events
         SetSubscriptions();
     }
@@ -779,7 +743,7 @@ public class XInput : MonoBehaviour
     {
         #region LT
         //RELEASED
-        if (data.lt.Status == InputStatus.PRESSED && current.Triggers.Left < triggerDeadZone)
+        if (data.lt.Status == InputStatus.HELD && current.Triggers.Left < triggerDeadZone)
         {
             data.lt.SetStatus(InputStatus.RELEASED);
             data.lt.SetXYValue(current.Triggers.Left, current.Triggers.Left);
@@ -818,7 +782,7 @@ public class XInput : MonoBehaviour
         #endregion
         #region RT
         //RELEASED
-        if (data.rt.Status == InputStatus.PRESSED && current.Triggers.Right < triggerDeadZone)
+        if (data.rt.Status == InputStatus.HELD && current.Triggers.Right < triggerDeadZone)
         {
             data.rt.SetStatus(InputStatus.RELEASED);
             data.rt.SetXYValue(current.Triggers.Right, current.Triggers.Right);
