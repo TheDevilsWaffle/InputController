@@ -61,7 +61,7 @@ public class InputData
         private set { id = value; }
     }
     //keycode
-    KeyCode key;
+    KeyCode key = KeyCode.None;
     public KeyCode Key
     {
         get { return key; }

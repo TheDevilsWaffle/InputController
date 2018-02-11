@@ -1,13 +1,13 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 //AUTHOR — Travis Moore
-//SCRIPT — XInput_Gamepad.cs
+//SCRIPT — Gamepad.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
 
-public class XInput_Gamepad : MonoBehaviour
+public class Gamepad : MonoBehaviour
 {
     #region FIELDS
     [Range(1,4)]
@@ -36,6 +36,7 @@ public class XInput_Gamepad : MonoBehaviour
     [SerializeField]
     InputStatusAction left;
     [Space]
+
     [Header("Buttons")]
     [SerializeField]
     InputStatusAction a;
@@ -45,13 +46,6 @@ public class XInput_Gamepad : MonoBehaviour
     InputStatusAction y;
     [SerializeField]
     InputStatusAction b;
-    [Space]
-
-    [Header("Misc. Buttons")]
-    [SerializeField]
-    InputStatusAction view;
-    [SerializeField]
-    InputStatusAction menu;
     [Space]
 
     [Header("Bumpers")]
@@ -66,6 +60,13 @@ public class XInput_Gamepad : MonoBehaviour
     InputStatusAction leftTrigger;
     [SerializeField]
     InputStatusAction rightTrigger;
+    [Space]
+
+    [Header("Misc. Buttons")]
+    [SerializeField]
+    InputStatusAction view;
+    [SerializeField]
+    InputStatusAction menu;
     #endregion
     #region INITIALIZATION
     ///////////////////////////////////////////////////////////////////////////////////////////////

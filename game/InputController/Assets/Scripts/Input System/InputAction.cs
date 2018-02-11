@@ -4,11 +4,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
-using System.Collections;
 
 public class InputAction : MonoBehaviour
 {
-    protected virtual void Awake(){}
-    protected virtual void Start(){}
     public virtual void Activate(InputData _data){ }
 }

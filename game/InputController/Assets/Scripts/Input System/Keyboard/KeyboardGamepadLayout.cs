@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 //AUTHOR — Travis Moore
-//SCRIPT — KeyboardControls_Gamepad.cs
+//SCRIPT — KeyboardGamepadLayout.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 using System;
@@ -8,18 +8,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-#region EVENTS
-public class EVENT_INPUT_KEYBOARD_KEY_BROADCAST : GameEvent
-{
-    public InputData keyInputData;
-    public EVENT_INPUT_KEYBOARD_KEY_BROADCAST(InputData _keyInputData)
-    {
-        keyInputData = _keyInputData;
-    }
-}
-#endregion
-
-public class KeyboardControls_Gamepad : MonoBehaviour
+public class KeyboardGamepadLayout : MonoBehaviour
 {
     #region FIELDS
     [Header("Keyboard Mapped Like A Gamepad")]

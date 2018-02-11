@@ -1,16 +1,17 @@
 ﻿﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 //AUTHOR — Travis Moore
-//SCRIPT — KeyboardControls_SingleKey.cs
+//SCRIPT — KeyboardKey.cs
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
 using System.Collections;
 
-public class KeyboardControls_SingleKey : MonoBehaviour
+public class KeyboardKey : MonoBehaviour
 {
     #region FIELDS
     [Header("Single Keyboard Key")]
     [Space]
+    
     [Header("Key")]
     public KeyCode key = KeyCode.Q;
     InputData keyInputData;

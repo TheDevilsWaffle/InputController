@@ -80,6 +80,14 @@ public class EVENT_INPUT_XINPUT_UPDATE : GameEvent
         xInputdata = _xInputData;
     }
 }
+public class EVENT_INPUT_KEYBOARD_KEY_BROADCAST : GameEvent
+{
+    public InputData keyInputData;
+    public EVENT_INPUT_KEYBOARD_KEY_BROADCAST(InputData _keyInputData)
+    {
+        keyInputData = _keyInputData;
+    }
+}
 #endregion
 
 [RequireComponent(typeof(XInput))]

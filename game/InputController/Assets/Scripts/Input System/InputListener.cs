@@ -53,7 +53,7 @@ public class InputListener : InputAction
     /// Awake
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    protected override void Awake()
+    void Awake()
     {
         //SetSubscriptions();
     }
@@ -62,7 +62,7 @@ public class InputListener : InputAction
     /// Start
     /// </summary>
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    protected override void Start()
+    void Start()
     {
     
     }

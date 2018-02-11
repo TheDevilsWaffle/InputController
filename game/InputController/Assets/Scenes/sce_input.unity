@@ -342,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 737960978}
   - component: {fileID: 737960980}
+  - component: {fileID: 737960977}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Untagged
@@ -349,6 +350,90 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &737960977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737960976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab3f5b1efdb6b142866caf5de9af4f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: 1
+  leftStick:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  l3:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  rightStick:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  r3:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  up:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  right:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  down:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  left:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  a:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  x:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  y:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  b:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  leftBumper:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  rightBumper:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  leftTrigger:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  rightTrigger:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  view:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
+  menu:
+    onPressed: {fileID: 0}
+    onHeld: {fileID: 0}
+    onReleased: {fileID: 0}
 --- !u!4 &737960978
 Transform:
   m_ObjectHideFlags: 0
