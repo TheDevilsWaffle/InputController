@@ -109,8 +109,8 @@ public class XInput : MonoBehaviour
                 //gamepad is not detected, broadcast gamepad detection lost event
                 else
                 {
-                    CheckForGamepad(_player);
                     Events.instance.Raise(new EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_LOST(_player));
+                    CheckForGamepad(_player);
                 }
             }
         }
@@ -527,9 +527,19 @@ public class XInput : MonoBehaviour
         }
         #endregion
         #region A BUTTON
-        //RELEASED
-        if (previous.Buttons.A == ButtonState.Pressed && current.Buttons.A == ButtonState.Released)
+        //INACTIVE
+        if (previous.Buttons.A == ButtonState.Released && current.Buttons.A == ButtonState.Released)
         {
+            print("inactive");
+            data.a.SetStatus(InputStatus.INACTIVE);
+            data.a.SetXYValue(0f, 0f);
+            data.a.SetHeldDuration(0f);
+            data.a.SetInactiveDuration(Time.deltaTime);
+        }
+        //RELEASED
+        else if (previous.Buttons.A == ButtonState.Pressed && current.Buttons.A == ButtonState.Released)
+        {
+            print("released");
             data.a.SetStatus(InputStatus.RELEASED);
             data.a.SetXYValue(0f, 0f);
             data.a.SetInactiveDuration(Time.deltaTime);
@@ -549,14 +559,6 @@ public class XInput : MonoBehaviour
             data.a.SetHeldDuration(Time.deltaTime);
 
             UpdateCombo(data.a);
-        }
-        //INACTIVE
-        else
-        {
-            data.a.SetStatus(InputStatus.INACTIVE);
-            data.a.SetXYValue(0f, 0f);
-            data.a.SetHeldDuration(0f);
-            data.a.SetInactiveDuration(Time.deltaTime);
         }
         #endregion
         #region X BUTTON

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/sce_example_gamepad.unity
+- path: Assets/Scenes/sce_input.unity
   isLoaded: 1
   isActive: 1

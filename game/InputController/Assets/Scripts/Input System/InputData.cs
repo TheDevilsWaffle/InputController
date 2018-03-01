@@ -75,7 +75,7 @@ public class InputData
         private set { icon_xbox = value; }
     }
     //status
-    InputStatus status;
+    InputStatus status = InputStatus.INACTIVE;
     public InputStatus Status
     {
         get { return status; }

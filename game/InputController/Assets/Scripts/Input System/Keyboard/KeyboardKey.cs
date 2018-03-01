@@ -144,7 +144,7 @@ public class KeyboardKey : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             //update data
-            keyInputData.SetStatus(InputStatus.RELEASED);
+            keyInputData.SetStatus(InputStatus.PRESSED);
             keyInputData.SetXYRawValue(Vector2.one);
             keyInputData.AddXYValue(Vector2.one);
             keyInputData.SetHeldDuration(Time.deltaTime);
