@@ -30,6 +30,8 @@ public class XInput : MonoBehaviour
     float up_left = -135f;
     float axisLimit = 22.5f;
 
+    bool startDelay = true;
+
     #endregion
     #region INITIALIZATION
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,12 +99,15 @@ public class XInput : MonoBehaviour
                     current = GamePad.GetState((PlayerIndex)_player);
 
                     //check current gamepad dpad/sticks/bumpers/triggers for input
-                    UpdateSticks();
-                    UpdateButtons();
-                    UpdateTriggers();
-                    UpdateBumpers();
-                    UpdateDPad();
-
+                    if(!startDelay)
+                    {
+                        UpdateSticks();
+                        UpdateButtons();
+                        UpdateTriggers();
+                        UpdateBumpers();
+                        UpdateDPad();
+                    }
+                    startDelay = false;
                     //broadcast event with updated gamepad information for current gamepad
                     Broadcast(_player, data);
                 }
@@ -129,6 +134,7 @@ public class XInput : MonoBehaviour
         //Debug.Log("InitializeXInput() for "+_event.players+" number of players");
         
         enableXInput = true;
+        startDelay = true;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
     /// <summy>
@@ -530,7 +536,6 @@ public class XInput : MonoBehaviour
         //INACTIVE
         if (previous.Buttons.A == ButtonState.Released && current.Buttons.A == ButtonState.Released)
         {
-            print("inactive");
             data.a.SetStatus(InputStatus.INACTIVE);
             data.a.SetXYValue(0f, 0f);
             data.a.SetHeldDuration(0f);
@@ -539,7 +544,6 @@ public class XInput : MonoBehaviour
         //RELEASED
         else if (previous.Buttons.A == ButtonState.Pressed && current.Buttons.A == ButtonState.Released)
         {
-            print("released");
             data.a.SetStatus(InputStatus.RELEASED);
             data.a.SetXYValue(0f, 0f);
             data.a.SetInactiveDuration(Time.deltaTime);
