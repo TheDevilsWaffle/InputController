@@ -63,72 +63,72 @@ public class GamepadTriggers : MonoBehaviour
     void UpdateInputActions(EVENT_INPUT_XINPUT_UPDATE _event)
     {
         //DEBUG
-        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputdata.a.Status);
+        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputData.a.Status);
 
         //check if this is the right player
         if (_event.player == player)
         {
             #region LEFT TRIGGER
             //RELEASED
-            if (_event.xInputdata.lt.Status == InputStatus.RELEASED)
+            if (_event.xInputData.lt.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (leftTrigger.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onReleased.Activate(_event.xInputdata.lt);
+                    leftTrigger.onReleased.Activate(_event.xInputData.lt);
                 }
             }
             //HELD
-            if (_event.xInputdata.lt.Status == InputStatus.HELD)
+            if (_event.xInputData.lt.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (leftTrigger.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onHeld.Activate(_event.xInputdata.lt);
+                    leftTrigger.onHeld.Activate(_event.xInputData.lt);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.lt.Status == InputStatus.PRESSED)
+            if (_event.xInputData.lt.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (leftTrigger.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onPressed.Activate(_event.xInputdata.lt);
+                    leftTrigger.onPressed.Activate(_event.xInputData.lt);
                 }
             }
             #endregion
             #region RIGHT TRIGGER
             //RELEASED
-            if (_event.xInputdata.rt.Status == InputStatus.RELEASED)
+            if (_event.xInputData.rt.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (rightTrigger.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onReleased.Activate(_event.xInputdata.rt);
+                    rightTrigger.onReleased.Activate(_event.xInputData.rt);
                 }
             }
             //HELD
-            if (_event.xInputdata.rt.Status == InputStatus.HELD)
+            if (_event.xInputData.rt.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (rightTrigger.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onHeld.Activate(_event.xInputdata.rt);
+                    rightTrigger.onHeld.Activate(_event.xInputData.rt);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.rt.Status == InputStatus.PRESSED)
+            if (_event.xInputData.rt.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (rightTrigger.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onPressed.Activate(_event.xInputdata.rt);
+                    rightTrigger.onPressed.Activate(_event.xInputData.rt);
                 }
             }
             #endregion

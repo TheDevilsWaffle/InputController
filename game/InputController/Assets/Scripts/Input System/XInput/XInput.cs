@@ -320,6 +320,16 @@ public class XInput : MonoBehaviour
         data.ls.SetAngle(Mathf.Ceil(Mathf.Atan2(-current.ThumbSticks.Left.Y, current.ThumbSticks.Left.X) * Mathf.Rad2Deg));
         data.ls.SetArcadeAxis(DetermineArcadeAxis(data.ls.Status, data.ls.Angle));
 
+        //inverted axis correction
+        if(InputSystem.invertXAxis)
+        {
+            data.ls.SetXValue(-data.ls.XYValues.x);
+        }
+        if (InputSystem.invertYAxis)
+        {
+            data.ls.SetXValue(-data.ls.XYValues.y);
+        }
+
         //check to see if the value of x and y is outside tolerance deadzone
         if (current.ThumbSticks.Left.X < -analogStickDeadZone ||
             current.ThumbSticks.Left.X > analogStickDeadZone ||
@@ -334,6 +344,8 @@ public class XInput : MonoBehaviour
             {
                 data.ls.SetStatus(InputStatus.HELD);
             }
+
+            UpdateCombo(data.ls);
         }
 
         //else, we're inside the deadzone, update status
@@ -407,6 +419,9 @@ public class XInput : MonoBehaviour
             {
                 data.rs.SetStatus(InputStatus.HELD);
             }
+
+            UpdateCombo(data.rs);
+
         }
 
         //else, we're outside the deadzone, update status
@@ -900,7 +915,7 @@ public class XInput : MonoBehaviour
         //DEBUG - Event broadcast
         //Debug.Log("TEST - Event Broadcast(PLAYER("+_player +"): a button = "+_data.a.Status);
 
-       Events.instance.Raise(new EVENT_INPUT_XINPUT_UPDATE(_player, data));
+       Events.instance.Raise(new EVENT_INPUT_XINPUT_UPDATE(_player, _data));
     }
     #endregion
 

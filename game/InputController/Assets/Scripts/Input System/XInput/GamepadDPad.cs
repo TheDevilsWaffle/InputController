@@ -71,7 +71,7 @@ public class GamepadDPad : MonoBehaviour
     void UpdateInputActions(EVENT_INPUT_XINPUT_UPDATE _event)
     {
         //DEBUG
-        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputdata.a.Status);
+        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputData.a.Status);
 
         //check if this is the right player
         if (_event.player == player)
@@ -79,129 +79,129 @@ public class GamepadDPad : MonoBehaviour
             //buttons
             #region DPAD UP
             //RELEASED
-            if (_event.xInputdata.dp_up.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_up.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadUp.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadUp.onReleased.Activate(_event.xInputdata.dp_up);
+                    dPadUp.onReleased.Activate(_event.xInputData.dp_up);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_up.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_up.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadUp.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadUp.onHeld.Activate(_event.xInputdata.dp_up);
+                    dPadUp.onHeld.Activate(_event.xInputData.dp_up);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_up.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_up.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadUp.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadUp.onPressed.Activate(_event.xInputdata.dp_up);
+                    dPadUp.onPressed.Activate(_event.xInputData.dp_up);
                 }
             }
             #endregion
             #region DPAD RIGHT
             //RELEASED
-            if (_event.xInputdata.dp_right.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_right.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadRight.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadRight.onReleased.Activate(_event.xInputdata.dp_right);
+                    dPadRight.onReleased.Activate(_event.xInputData.dp_right);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_right.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_right.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadRight.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadRight.onHeld.Activate(_event.xInputdata.dp_right);
+                    dPadRight.onHeld.Activate(_event.xInputData.dp_right);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_right.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_right.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadRight.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadRight.onPressed.Activate(_event.xInputdata.dp_right);
+                    dPadRight.onPressed.Activate(_event.xInputData.dp_right);
                 }
             }
             #endregion
             #region DPAD DOWN
             //RELEASED
-            if (_event.xInputdata.dp_down.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_down.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadDown.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadDown.onReleased.Activate(_event.xInputdata.dp_down);
+                    dPadDown.onReleased.Activate(_event.xInputData.dp_down);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_down.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_down.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadDown.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadDown.onHeld.Activate(_event.xInputdata.dp_down);
+                    dPadDown.onHeld.Activate(_event.xInputData.dp_down);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_down.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_down.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadDown.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadDown.onPressed.Activate(_event.xInputdata.dp_down);
+                    dPadDown.onPressed.Activate(_event.xInputData.dp_down);
                 }
             }
             #endregion
             #region DPAD LEFT
             //RELEASED
-            if (_event.xInputdata.dp_left.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_left.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadLeft.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadLeft.onReleased.Activate(_event.xInputdata.dp_left);
+                    dPadLeft.onReleased.Activate(_event.xInputData.dp_left);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_left.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_left.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadLeft.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadLeft.onHeld.Activate(_event.xInputdata.dp_left);
+                    dPadLeft.onHeld.Activate(_event.xInputData.dp_left);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_left.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_left.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (dPadLeft.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    dPadLeft.onPressed.Activate(_event.xInputdata.dp_left);
+                    dPadLeft.onPressed.Activate(_event.xInputData.dp_left);
                 }
             }
             #endregion

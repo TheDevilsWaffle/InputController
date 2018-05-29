@@ -119,7 +119,7 @@ public class Gamepad : MonoBehaviour
     void UpdateInputActions(EVENT_INPUT_XINPUT_UPDATE _event)
     {
         //DEBUG
-        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputdata.a.Status);
+        //Debug.Log("PLAYER("+_event.player+") a = "+ _event.xInputData.a.Status);
 
         //check if this is the right player
         if(_event.player == player)
@@ -127,129 +127,129 @@ public class Gamepad : MonoBehaviour
             //buttons
             #region A BUTTON
             //RELEASED
-            if(_event.xInputdata.a.Status == InputStatus.RELEASED)
+            if(_event.xInputData.a.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    a.onReleased.Activate(_event.xInputdata.a);
+                    a.onReleased.Activate(_event.xInputData.a);
                 }
             }
             //HELD
-            if(_event.xInputdata.a.Status == InputStatus.HELD)
+            if(_event.xInputData.a.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    a.onHeld.Activate(_event.xInputdata.a);
+                    a.onHeld.Activate(_event.xInputData.a);
                 }
             }
             //PRESSED
-            if(_event.xInputdata.a.Status == InputStatus.PRESSED)
+            if(_event.xInputData.a.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(a.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    a.onPressed.Activate(_event.xInputdata.a);
+                    a.onPressed.Activate(_event.xInputData.a);
                 }
             }
             #endregion
             #region B BUTTON
             //RELEASED
-            if (_event.xInputdata.b.Status == InputStatus.RELEASED)
+            if (_event.xInputData.b.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (b.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    b.onReleased.Activate(_event.xInputdata.b);
+                    b.onReleased.Activate(_event.xInputData.b);
                 }
             }
             //HELD
-            if (_event.xInputdata.b.Status == InputStatus.HELD)
+            if (_event.xInputData.b.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (b.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    b.onHeld.Activate(_event.xInputdata.b);
+                    b.onHeld.Activate(_event.xInputData.b);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.b.Status == InputStatus.PRESSED)
+            if (_event.xInputData.b.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (b.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    b.onPressed.Activate(_event.xInputdata.b);
+                    b.onPressed.Activate(_event.xInputData.b);
                 }
             }
             #endregion
             #region Y BUTTON
             //RELEASED
-            if (_event.xInputdata.y.Status == InputStatus.RELEASED)
+            if (_event.xInputData.y.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (y.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    y.onReleased.Activate(_event.xInputdata.y);
+                    y.onReleased.Activate(_event.xInputData.y);
                 }
             }
             //HELD
-            if (_event.xInputdata.y.Status == InputStatus.HELD)
+            if (_event.xInputData.y.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (y.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    y.onHeld.Activate(_event.xInputdata.y);
+                    y.onHeld.Activate(_event.xInputData.y);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.y.Status == InputStatus.PRESSED)
+            if (_event.xInputData.y.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (y.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    y.onPressed.Activate(_event.xInputdata.y);
+                    y.onPressed.Activate(_event.xInputData.y);
                 }
             }
             #endregion
             #region X BUTTON
             //RELEASED
-            if (_event.xInputdata.x.Status == InputStatus.RELEASED)
+            if (_event.xInputData.x.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (x.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    x.onReleased.Activate(_event.xInputdata.x);
+                    x.onReleased.Activate(_event.xInputData.x);
                 }
             }
             //HELD
-            if (_event.xInputdata.x.Status == InputStatus.HELD)
+            if (_event.xInputData.x.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (x.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    x.onHeld.Activate(_event.xInputdata.x);
+                    x.onHeld.Activate(_event.xInputData.x);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.x.Status == InputStatus.PRESSED)
+            if (_event.xInputData.x.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (x.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    x.onPressed.Activate(_event.xInputdata.x);
+                    x.onPressed.Activate(_event.xInputData.x);
                 }
             }
             #endregion
@@ -257,65 +257,65 @@ public class Gamepad : MonoBehaviour
             //bumpers
             #region LEFT BUMPER
             //RELEASED
-            if(_event.xInputdata.lb.Status == InputStatus.RELEASED)
+            if(_event.xInputData.lb.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(leftBumper.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftBumper.onReleased.Activate(_event.xInputdata.lb);
+                    leftBumper.onReleased.Activate(_event.xInputData.lb);
                 }
             }
             //HELD
-            if(_event.xInputdata.lb.Status == InputStatus.HELD)
+            if(_event.xInputData.lb.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(leftBumper.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftBumper.onHeld.Activate(_event.xInputdata.lb);
+                    leftBumper.onHeld.Activate(_event.xInputData.lb);
                 }
             }
             //PRESSED
-            if(_event.xInputdata.lb.Status == InputStatus.PRESSED)
+            if(_event.xInputData.lb.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(leftBumper.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftBumper.onPressed.Activate(_event.xInputdata.lb);
+                    leftBumper.onPressed.Activate(_event.xInputData.lb);
                 }
             }
             #endregion
             #region RIGHT BUMPER
             //RELEASED
-            if(_event.xInputdata.rb.Status == InputStatus.RELEASED)
+            if(_event.xInputData.rb.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(rightBumper.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightBumper.onReleased.Activate(_event.xInputdata.rb);
+                    rightBumper.onReleased.Activate(_event.xInputData.rb);
                 }
             }
             //HELD
-            if(_event.xInputdata.rb.Status == InputStatus.HELD)
+            if(_event.xInputData.rb.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(rightBumper.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightBumper.onHeld.Activate(_event.xInputdata.rb);
+                    rightBumper.onHeld.Activate(_event.xInputData.rb);
                 }
             }
             //PRESSED
-            if(_event.xInputdata.rb.Status == InputStatus.PRESSED)
+            if(_event.xInputData.rb.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(rightBumper.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightBumper.onPressed.Activate(_event.xInputdata.rb);
+                    rightBumper.onPressed.Activate(_event.xInputData.rb);
                 }
             }
             #endregion
@@ -323,65 +323,65 @@ public class Gamepad : MonoBehaviour
             //triggers
             #region LEFT TRIGGER
             //RELEASED
-            if(_event.xInputdata.lt.Status == InputStatus.RELEASED)
+            if(_event.xInputData.lt.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(leftTrigger.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onReleased.Activate(_event.xInputdata.lt);
+                    leftTrigger.onReleased.Activate(_event.xInputData.lt);
                 }
             }
             //HELD
-            if(_event.xInputdata.lt.Status == InputStatus.HELD)
+            if(_event.xInputData.lt.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(leftTrigger.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onHeld.Activate(_event.xInputdata.lt);
+                    leftTrigger.onHeld.Activate(_event.xInputData.lt);
                 }
             }
             //PRESSED
-            if(_event.xInputdata.lt.Status == InputStatus.PRESSED)
+            if(_event.xInputData.lt.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(leftTrigger.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftTrigger.onPressed.Activate(_event.xInputdata.lt);
+                    leftTrigger.onPressed.Activate(_event.xInputData.lt);
                 }
             }
             #endregion
             #region RIGHT TRIGGER
             //RELEASED
-            if(_event.xInputdata.rt.Status == InputStatus.RELEASED)
+            if(_event.xInputData.rt.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(rightTrigger.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onReleased.Activate(_event.xInputdata.rt);
+                    rightTrigger.onReleased.Activate(_event.xInputData.rt);
                 }
             }
             //HELD
-            if(_event.xInputdata.rt.Status == InputStatus.HELD)
+            if(_event.xInputData.rt.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(rightTrigger.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onHeld.Activate(_event.xInputdata.rt);
+                    rightTrigger.onHeld.Activate(_event.xInputData.rt);
                 }
             }
             //PRESSED
-            if(_event.xInputdata.rt.Status == InputStatus.PRESSED)
+            if(_event.xInputData.rt.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if(rightTrigger.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightTrigger.onPressed.Activate(_event.xInputdata.rt);
+                    rightTrigger.onPressed.Activate(_event.xInputData.rt);
                 }
             }
             #endregion
@@ -389,65 +389,65 @@ public class Gamepad : MonoBehaviour
             //analog sticks
             #region LEFT ANALOG STICK
             //RELEASED
-            if (_event.xInputdata.ls.Status == InputStatus.RELEASED)
+            if (_event.xInputData.ls.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (leftStick.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftStick.onReleased.Activate(_event.xInputdata.ls);
+                    leftStick.onReleased.Activate(_event.xInputData.ls);
                 }
             }
             //HELD
-            if (_event.xInputdata.ls.Status == InputStatus.HELD)
+            if (_event.xInputData.ls.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (leftStick.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftStick.onHeld.Activate(_event.xInputdata.ls);
+                    leftStick.onHeld.Activate(_event.xInputData.ls);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.ls.Status == InputStatus.PRESSED)
+            if (_event.xInputData.ls.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (leftStick.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    leftStick.onPressed.Activate(_event.xInputdata.ls);
+                    leftStick.onPressed.Activate(_event.xInputData.ls);
                 }
             }
             #endregion
             #region RIGHT ANALOG STICK
             //RELEASED
-            if (_event.xInputdata.rs.Status == InputStatus.RELEASED)
+            if (_event.xInputData.rs.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (rightStick.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightStick.onReleased.Activate(_event.xInputdata.rs);
+                    rightStick.onReleased.Activate(_event.xInputData.rs);
                 }
             }
             //HELD
-            if (_event.xInputdata.rs.Status == InputStatus.HELD)
+            if (_event.xInputData.rs.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (rightStick.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightStick.onHeld.Activate(_event.xInputdata.rs);
+                    rightStick.onHeld.Activate(_event.xInputData.rs);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.rs.Status == InputStatus.PRESSED)
+            if (_event.xInputData.rs.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (rightStick.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    rightStick.onPressed.Activate(_event.xInputdata.rs);
+                    rightStick.onPressed.Activate(_event.xInputData.rs);
                 }
             }
             #endregion
@@ -455,129 +455,129 @@ public class Gamepad : MonoBehaviour
             //dpads
             #region DPAD UP
             //RELEASED
-            if (_event.xInputdata.dp_up.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_up.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (up.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    up.onReleased.Activate(_event.xInputdata.dp_up);
+                    up.onReleased.Activate(_event.xInputData.dp_up);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_up.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_up.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (up.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    up.onHeld.Activate(_event.xInputdata.dp_up);
+                    up.onHeld.Activate(_event.xInputData.dp_up);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_up.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_up.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (up.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    up.onPressed.Activate(_event.xInputdata.dp_up);
+                    up.onPressed.Activate(_event.xInputData.dp_up);
                 }
             }
             #endregion
             #region DPAD RIGHT
             //RELEASED
-            if (_event.xInputdata.dp_right.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_right.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (right.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    right.onReleased.Activate(_event.xInputdata.dp_right);
+                    right.onReleased.Activate(_event.xInputData.dp_right);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_right.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_right.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (right.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    right.onHeld.Activate(_event.xInputdata.dp_right);
+                    right.onHeld.Activate(_event.xInputData.dp_right);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_right.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_right.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (right.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    right.onPressed.Activate(_event.xInputdata.dp_right);
+                    right.onPressed.Activate(_event.xInputData.dp_right);
                 }
             }
             #endregion
             #region DPAD DOWN
             //RELEASED
-            if (_event.xInputdata.dp_down.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_down.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (down.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    down.onReleased.Activate(_event.xInputdata.dp_down);
+                    down.onReleased.Activate(_event.xInputData.dp_down);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_down.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_down.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (down.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    down.onHeld.Activate(_event.xInputdata.dp_down);
+                    down.onHeld.Activate(_event.xInputData.dp_down);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_down.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_down.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (down.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    down.onPressed.Activate(_event.xInputdata.dp_down);
+                    down.onPressed.Activate(_event.xInputData.dp_down);
                 }
             }
             #endregion
             #region DPAD LEFT
             //RELEASED
-            if (_event.xInputdata.dp_left.Status == InputStatus.RELEASED)
+            if (_event.xInputData.dp_left.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (left.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    left.onReleased.Activate(_event.xInputdata.dp_left);
+                    left.onReleased.Activate(_event.xInputData.dp_left);
                 }
             }
             //HELD
-            if (_event.xInputdata.dp_left.Status == InputStatus.HELD)
+            if (_event.xInputData.dp_left.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (left.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    left.onHeld.Activate(_event.xInputdata.dp_left);
+                    left.onHeld.Activate(_event.xInputData.dp_left);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.dp_left.Status == InputStatus.PRESSED)
+            if (_event.xInputData.dp_left.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (left.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    left.onPressed.Activate(_event.xInputdata.dp_left);
+                    left.onPressed.Activate(_event.xInputData.dp_left);
                 }
             }
             #endregion
@@ -585,129 +585,129 @@ public class Gamepad : MonoBehaviour
             //misc buttons
             #region VIEW
             //RELEASED
-            if (_event.xInputdata.view.Status == InputStatus.RELEASED)
+            if (_event.xInputData.view.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (view.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    view.onReleased.Activate(_event.xInputdata.view);
+                    view.onReleased.Activate(_event.xInputData.view);
                 }
             }
             //HELD
-            if (_event.xInputdata.view.Status == InputStatus.HELD)
+            if (_event.xInputData.view.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (view.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    view.onHeld.Activate(_event.xInputdata.view);
+                    view.onHeld.Activate(_event.xInputData.view);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.view.Status == InputStatus.PRESSED)
+            if (_event.xInputData.view.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (view.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    view.onPressed.Activate(_event.xInputdata.view);
+                    view.onPressed.Activate(_event.xInputData.view);
                 }
             }
             #endregion
             #region MENU
             //RELEASED
-            if (_event.xInputdata.menu.Status == InputStatus.RELEASED)
+            if (_event.xInputData.menu.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (menu.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    menu.onReleased.Activate(_event.xInputdata.menu);
+                    menu.onReleased.Activate(_event.xInputData.menu);
                 }
             }
             //HELD
-            if (_event.xInputdata.menu.Status == InputStatus.HELD)
+            if (_event.xInputData.menu.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (menu.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    menu.onHeld.Activate(_event.xInputdata.menu);
+                    menu.onHeld.Activate(_event.xInputData.menu);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.menu.Status == InputStatus.PRESSED)
+            if (_event.xInputData.menu.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (menu.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    menu.onPressed.Activate(_event.xInputdata.menu);
+                    menu.onPressed.Activate(_event.xInputData.menu);
                 }
             }
             #endregion
             #region L3
             //RELEASED
-            if (_event.xInputdata.l3.Status == InputStatus.RELEASED)
+            if (_event.xInputData.l3.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (l3.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    l3.onReleased.Activate(_event.xInputdata.l3);
+                    l3.onReleased.Activate(_event.xInputData.l3);
                 }
             }
             //HELD
-            if (_event.xInputdata.l3.Status == InputStatus.HELD)
+            if (_event.xInputData.l3.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (l3.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    l3.onHeld.Activate(_event.xInputdata.l3);
+                    l3.onHeld.Activate(_event.xInputData.l3);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.l3.Status == InputStatus.PRESSED)
+            if (_event.xInputData.l3.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (l3.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    l3.onPressed.Activate(_event.xInputdata.l3);
+                    l3.onPressed.Activate(_event.xInputData.l3);
                 }
             }
             #endregion
             #region R3
             //RELEASED
-            if (_event.xInputdata.r3.Status == InputStatus.RELEASED)
+            if (_event.xInputData.r3.Status == InputStatus.RELEASED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (r3.onReleased != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    r3.onReleased.Activate(_event.xInputdata.r3);
+                    r3.onReleased.Activate(_event.xInputData.r3);
                 }
             }
             //HELD
-            if (_event.xInputdata.r3.Status == InputStatus.HELD)
+            if (_event.xInputData.r3.Status == InputStatus.HELD)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (r3.onHeld != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    r3.onHeld.Activate(_event.xInputdata.r3);
+                    r3.onHeld.Activate(_event.xInputData.r3);
                 }
             }
             //PRESSED
-            if (_event.xInputdata.r3.Status == InputStatus.PRESSED)
+            if (_event.xInputData.r3.Status == InputStatus.PRESSED)
             {
                 //safety check to see if we have an InputAction associated with this button/state combo
                 if (r3.onPressed != null)
                 {
                     //fire off input action and pass data for this button/stick/etc. as a parameter
-                    r3.onPressed.Activate(_event.xInputdata.r3);
+                    r3.onPressed.Activate(_event.xInputData.r3);
                 }
             }
             #endregion

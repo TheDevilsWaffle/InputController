@@ -73,11 +73,11 @@ public class EVENT_INPUT_XINPUT_GAMEPAD_DETECTION_ACQUIRED : GameEvent
 public class EVENT_INPUT_XINPUT_UPDATE : GameEvent
 {
     public int player;
-    public XInputData xInputdata;
+    public XInputData xInputData;
     public EVENT_INPUT_XINPUT_UPDATE(int _playerNumber, XInputData _xInputData)
     {
         player = _playerNumber;
-        xInputdata = _xInputData;
+        xInputData = _xInputData;
     }
 }
 public class EVENT_INPUT_KEYBOARD_KEY_BROADCAST : GameEvent
@@ -133,6 +133,15 @@ public class InputSystem : MonoBehaviour
     [Range(2, 20)]
     int maxButtonsCombo = 3;
     public static int maxButtonsRemembered;
+
+    [Header("Axis Preferences")]
+    [SerializeField]
+    bool setInvertXAxis = false;
+    [SerializeField]
+    bool setInvertYAxis = false;
+    public static bool invertXAxis;
+    [SerializeField]
+    public static bool invertYAxis;
     #endregion
 
     #region INITIALIZATION
@@ -149,6 +158,8 @@ public class InputSystem : MonoBehaviour
         analogStickDeadZone = analogSticksDeadZone;
         triggerDeadZone = triggersDeadZone;
         maxButtonsRemembered = maxButtonsCombo;
+        invertXAxis = setInvertXAxis;
+        invertYAxis = setInvertYAxis;
         SetSubscriptions();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////
